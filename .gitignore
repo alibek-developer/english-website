@@ -1,0 +1,14 @@
+.encore
+encore.gen.go
+encore.gen.cue
+/.encore
+node_modules
+/encore.gen
+.env
+.env.local
+dist/
+build/
+.DS_Store
+.vscode/
+.idea/
+.vercel
