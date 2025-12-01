@@ -214,6 +214,7 @@ Vercel will automatically deploy on push.
 ## Support
 
 For issues:
+
 - Encore: https://encore.dev/docs
 - Vercel: https://vercel.com/docs
 - Clerk: https://clerk.com/docs
