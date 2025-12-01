@@ -8,11 +8,10 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 export default defineConfig({
-	// base: '/',  // ❗ Deploy uchun emas bo‘lsa, olib tashlagan yaxshi
 	resolve: {
 		alias: {
-			'@': path.resolve(__dirname, './src'),
-			'~backend/client': path.resolve(__dirname, './client'),
+			'@': path.resolve(__dirname), // <-- frontend root bo‘lgani uchun to‘g‘ri
+			'~backend/client': path.resolve(__dirname, '../backend/client'),
 			'~backend': path.resolve(__dirname, '../backend'),
 		},
 	},
