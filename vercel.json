@@ -3,16 +3,14 @@
 		{
 			"src": "package.json",
 			"use": "@vercel/static-build",
-			"config": {
-				"distDir": "dist"
-			}
+			"config": { "distDir": "dist" }
 		}
 	],
 	"routes": [
+		{ "handle": "filesystem" },
 		{
-			"src": "/(.*)\\.(js|mjs)$",
-			"headers": { "Content-Type": "application/javascript" }
-		},
-		{ "src": "/(.*)", "dest": "/index.html" }
+			"src": "/.*",
+			"dest": "/index.html"
+		}
 	]
 }
