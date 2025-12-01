@@ -4,7 +4,7 @@ import path from 'path'
 import { defineConfig } from 'vite'
 
 export default defineConfig({
-	base: '/', // ← YANGI QATOR (eng muhimi shu!)
+	base: '/',
 	resolve: {
 		alias: {
 			'@': path.resolve(__dirname),
