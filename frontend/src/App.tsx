@@ -20,10 +20,24 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 
 const queryClient = new QueryClient()
-const PUBLISHABLE_KEY =
-	'pk_test_aW5mb3JtZWQtbXVsZS04NS5jbGVyay5hY2NvdW50cy5kZXYk'
+const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY || ''
 
 export default function App() {
+	if (!PUBLISHABLE_KEY) {
+		console.error(
+			'❌ VITE_CLERK_PUBLISHABLE_KEY is missing! Check your .env file.'
+		)
+		return (
+			<div style={{ padding: '2rem', textAlign: 'center' }}>
+				<h1>Configuration Error</h1>
+				<p>
+					VITE_CLERK_PUBLISHABLE_KEY is not set. Please check your environment
+					variables.
+				</p>
+			</div>
+		)
+	}
+
 	return (
 		<ClerkProvider publishableKey={PUBLISHABLE_KEY}>
 			<QueryClientProvider client={queryClient}>

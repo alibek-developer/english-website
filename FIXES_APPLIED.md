@@ -1,219 +1,157 @@
-# Fixes Applied to English Teacher Course Site
+# White Screen Fixes Applied
 
-## Summary
+## ✅ Issues Fixed
 
-All 4 critical issues have been fixed:
+### 1. **Critical: Undefined Clerk Key Protection**
+   - **File**: `frontend/src/App.tsx`
+   - **Problem**: If `VITE_CLERK_PUBLISHABLE_KEY` is undefined, `ClerkProvider` crashes → white screen
+   - **Fix**: Added error boundary that shows helpful message instead of crashing
+   - **Result**: App now shows error message instead of blank screen if Clerk key is missing
 
-### ✅ 1. Admin Panel Modals and Dropdowns (100% Fixed)
+### 2. **Environment Variable Mismatch**
+   - **Files**: `frontend/src/api/axios.ts`, `frontend/src/client.ts`
+   - **Problem**: `axios.ts` used `VITE_API_URL`, `client.ts` used `VITE_API_BASE_URL` → inconsistency
+   - **Fix**: Unified both to check `VITE_API_URL` first, then fallback to `VITE_API_BASE_URL` → `VITE_CLIENT_TARGET` → `Local`
+   - **Result**: Both axios and Encore client now use same env variable resolution
 
-**Problem:** Dropdowns were using array indices instead of actual database IDs.
+### 3. **Missing Fallback in client.ts**
+   - **File**: `frontend/src/client.ts`
+   - **Problem**: If all env vars undefined, `ENCORE_BASE_URL` could be undefined
+   - **Fix**: Added fallback to `Local` (`http://localhost:4000`)
+   - **Result**: Always has a valid backend URL, even if env vars not set
 
-**Solution:**
-- Fixed `frontend/pages/AdminPage.tsx` - Video and Homework modals now use `course.id` instead of `index + 1`
-- Fixed `frontend/components/admin/LessonModal.tsx` - Course dropdown uses actual `course.id`
-- Updated all backend endpoints to return proper course IDs from database
-- Changed `backend/courses/list.ts` to fetch courses from database instead of hardcoded array
+### 4. **Added Debugging Warnings**
+   - **File**: `frontend/src/api/axios.ts`
+   - **Fix**: Console warning if no backend URL env var found
+   - **Result**: Easier to diagnose missing env variables
 
-**Files Changed:**
-- `backend/courses/list.ts` - Now fetches from database
-- `backend/courses/get.ts` - Uses database queries
-- `frontend/pages/AdminPage.tsx` - Fixed dropdown values
-- `frontend/components/admin/LessonModal.tsx` - Fixed dropdown values
+---
 
-### ✅ 2. Prisma/Database Issues (100% Fixed)
+## 📝 Required Actions
 
-**Problem:** Mixing Prisma schema with SQL migrations causing conflicts.
+### Step 1: Create Environment Files
 
-**Solution:**
-- Consolidated all tables into `backend/db/migrations/001_create_tables.up.sql`
-- Removed duplicate table definitions from `002_add_user_tables.up.sql`
-- Fixed table references (videos → lessons with video_url)
-- Added proper foreign key constraints and cascading deletes
-- Inserted sample courses into database for testing
-- Updated Prisma schema to be reference-only (not actively used)
+Create these files manually (they're gitignored):
 
-**Files Changed:**
-- `backend/db/migrations/001_create_tables.up.sql` - Complete schema with all tables
-- `backend/db/migrations/002_add_user_tables.up.sql` - Now empty (kept for history)
-- `backend/prisma/schema.prisma` - Marked as reference-only
-- `backend/admin/add_video.ts` - Uses lessons table instead of videos
-- `backend/student/enroll_course.ts` - Fixed video count query
-- `backend/student/get_dashboard.ts` - Fixed to use lessons table
-- `backend/admin/get_students.ts` - Fixed query methods
-- `backend/admin/get_stats.ts` - Added completed courses count
-
-### ✅ 3. Payment Flow with Stripe (100% Fixed)
-
-**Problem:** No real payment integration, fake payment flow.
-
-**Solution:**
-- Created Stripe Checkout Session integration
-- Added webhook handler for payment confirmation
-- Automatic enrollment after successful payment
-- Proper redirect flow: Course → Login (if needed) → Stripe Checkout → Success Page
-- Environment variables for Stripe keys and webhook secret
-
-**New Files Created:**
-- `backend/student/create_checkout_session.ts` - Creates Stripe checkout session
-- `backend/student/stripe_webhook.ts` - Handles payment confirmation webhook
-
-**Files Changed:**
-- `frontend/components/courses/CourseModal.tsx` - Now uses Stripe checkout
-- `backend/lib/stripe.ts` - Already existed, now properly used
-- `.env.example` - Added Stripe configuration
-- `README.md` - Updated with Stripe webhook setup instructions
-
-**Payment Flow:**
-1. User clicks "Xarid qilish" on course
-2. If not logged in → Clerk sign-in → returns to course
-3. Select payment method → Creates Stripe Checkout Session
-4. Redirects to Stripe payment page
-5. After payment → Stripe webhook confirms payment
-6. Database updated: enrollment status = 'paid'
-7. User redirected to success page
-8. Course appears in user's dashboard
-
-### ✅ 4. Deployment Ready (100% Fixed)
-
-**Problem:** Missing configuration for production deployment.
-
-**Solution:**
-- Created comprehensive deployment guide
-- Added environment variable examples
-- Fixed TypeScript compilation errors
-- Added proper .gitignore entries
-- Created Vercel configuration
-- Updated build settings
-
-**New Files Created:**
-- `DEPLOYMENT.md` - Complete step-by-step deployment guide
-- `vercel.json` - Vercel deployment configuration
-- `.env.example` - All required environment variables
-
-**Files Changed:**
-- `backend/tsconfig.json` - Added incremental compilation
-- `.gitignore` - Added dist, build, .vercel, etc.
-- `frontend/vite.config.ts` - Optimized for production
-- `README.md` - Updated with deployment instructions
-
-## Environment Variables Required
-
-### Backend (Encore Cloud)
-```
-StripeSecretKey=sk_test_... or sk_live_...
-StripeWebhookSecret=whsec_...
-FRONTEND_URL=https://your-app.vercel.app
+**`frontend/.env.development`**
+```env
+VITE_CLERK_PUBLISHABLE_KEY=pk_test_YOUR_KEY_HERE
+VITE_API_URL=http://localhost:4000
 ```
 
-### Frontend (Vercel)
-```
-VITE_CLERK_PUBLISHABLE_KEY=pk_test_...
-VITE_BACKEND_URL=https://staging-your-app.encr.app
-```
-
-## Next Steps to Deploy
-
-### 1. Generate Frontend Client (REQUIRED for Stripe)
-
-The Stripe integration code is ready but temporarily disabled to avoid TypeScript errors. To enable it:
-
-**Step 1:** Start the backend
-```bash
-cd backend
-encore run
+**`frontend/.env.production`** (for Vercel)
+```env
+VITE_CLERK_PUBLISHABLE_KEY=pk_live_YOUR_KEY_HERE
+VITE_API_URL=https://your-encore-backend.encr.app
 ```
 
-**Step 2:** In a new terminal, regenerate the client
-```bash
-cd backend
-encore gen client --target leap --output ../frontend/client.ts
-```
+### Step 2: Get Your Clerk Key
 
-**Step 3:** Update `frontend/components/courses/CourseModal.tsx`
-Replace the `enrollMutation` code with the commented Stripe checkout code:
-```typescript
-// Replace enrollMutation with:
-const checkoutMutation = useMutation({
-  mutationFn: (courseId: number) =>
-    backend.student.createCheckoutSession({ courseId }),
-  onSuccess: (data: any) => {
-    if (data?.url) {
-      window.location.href = data.url;
-    }
-  },
-  // ... rest of the code
-});
+1. Go to https://dashboard.clerk.com
+2. Select your app
+3. Go to **API Keys**
+4. Copy the **Publishable Key** (starts with `pk_test_` or `pk_live_`)
+5. Paste it into `.env.development`
 
-// In handlePayment, replace:
-enrollMutation.mutate({ courseId: course.id, paymentMethod: method });
-// With:
-checkoutMutation.mutate(course.id);
-```
-
-**Current Behavior (without client regeneration):**
-- Payment flow works but uses direct enrollment (no actual payment)
-- User is enrolled immediately after clicking payment method
-- Success page is shown
-
-**After Client Regeneration:**
-- Full Stripe integration active
-- User redirected to Stripe Checkout
-- Real payment processing
-- Webhook confirms payment
-
-### 2. Deploy Backend
+### Step 3: Restart Dev Server
 
 ```bash
-cd backend
-encore auth login
-git add -A
-git commit -m "Fixed all issues - ready for deployment"
-git push encore main
+cd frontend
+# Stop current server (Ctrl+C)
+npm run dev
 ```
 
-### 3. Set Encore Secrets
+### Step 4: Verify It Works
 
-In Encore Cloud Dashboard:
-- Add `StripeSecretKey`
-- Add `StripeWebhookSecret` (get from Stripe after creating webhook)
-- Add `FRONTEND_URL`
+1. Open `http://localhost:5173`
+2. Should see home page (not white screen)
+3. Open browser console (F12)
+4. Should see no red errors
+5. Try `/admin` route - should show login form
 
-### 4. Deploy Frontend
+---
 
-1. Push to GitHub
-2. Connect to Vercel
-3. Set environment variables in Vercel
-4. Deploy
+## 🔍 Debugging Steps
 
-### 5. Configure Stripe Webhook
+If still seeing white screen:
 
-1. Go to Stripe Dashboard → Webhooks
-2. Add endpoint: `https://staging-your-app.encr.app/webhooks/stripe`
-3. Select event: `checkout.session.completed`
-4. Copy webhook secret and add to Encore Cloud
+1. **Check Browser Console** (F12 → Console tab)
+   - Look for red errors
+   - Most common: "ClerkProvider: publishableKey is required"
 
-## Testing Checklist
+2. **Check Environment Variables**
+   - Add this to `App.tsx` temporarily:
+   ```tsx
+   console.log('Env check:', {
+     clerk: import.meta.env.VITE_CLERK_PUBLISHABLE_KEY ? 'SET' : 'MISSING',
+     api: import.meta.env.VITE_API_URL || 'MISSING'
+   })
+   ```
 
-- [ ] Run `encore run` in backend - should start without errors
-- [ ] Run `npm run dev` in frontend - should start without errors
-- [ ] Admin panel login works (admin@alibek.uz / admin123)
-- [ ] Admin can add new course - dropdown shows all courses
-- [ ] Admin can add new lesson - dropdown shows all courses with correct IDs
-- [ ] Admin can add new homework - dropdown shows all courses with correct IDs
-- [ ] User can view courses list
-- [ ] User can click "Xarid qilish" and see payment modal
-- [ ] Payment flow redirects to Stripe (after client regeneration)
-- [ ] After payment, user sees success page
-- [ ] Enrolled course appears in user dashboard
+3. **Check Network Tab** (F12 → Network)
+   - Look for failed requests (red)
+   - `index.html` should return 200 OK
+   - `main-[hash].js` should return 200 OK
 
-## Known Issues
+4. **Verify Backend Running**
+   ```bash
+   cd backend
+   encore run
+   ```
+   - Should see: "API Base URL: http://localhost:4000"
 
-None - all 4 issues are resolved!
+5. **Check File Structure**
+   ```
+   frontend/
+     .env.development  ← Must exist here
+     src/
+       App.tsx
+       main.tsx
+   ```
 
-## Files Summary
+---
 
-**Total Files Modified:** 23
-**New Files Created:** 5
-**Database Migrations:** Fixed and consolidated
+## 📋 Environment Variable Checklist
 
-All changes maintain backward compatibility and follow Encore.ts and React best practices.
+### Frontend (Vite) - Required
+
+- [ ] `VITE_CLERK_PUBLISHABLE_KEY` - From Clerk Dashboard
+- [ ] `VITE_API_URL` - Your Encore backend URL
+
+### Frontend (Vite) - Optional (for compatibility)
+
+- [ ] `VITE_API_BASE_URL` - Falls back to `VITE_API_URL`
+- [ ] `VITE_CLIENT_TARGET` - Falls back to `VITE_API_URL`
+
+### Backend (Encore Cloud Secrets)
+
+- [ ] `ClerkSecretKey` - From Clerk Dashboard (secret key, not publishable)
+- [ ] `StripeSecretKey` - From Stripe Dashboard
+- [ ] `StripeWebhookSecret` - From Stripe Webhook
+- [ ] `FRONTEND_URL` - Your Vercel frontend URL
+
+---
+
+## 🎯 Most Common Issue
+
+**90% of white screen issues are caused by:**
+
+❌ **Missing `VITE_CLERK_PUBLISHABLE_KEY`**
+
+**Symptoms:**
+- White screen
+- Console error: "ClerkProvider: publishableKey is required"
+- Or: "Cannot read property 'X' of undefined"
+
+**Fix:**
+1. Create `frontend/.env.development`
+2. Add: `VITE_CLERK_PUBLISHABLE_KEY=pk_test_YOUR_KEY`
+3. Restart dev server
+
+---
+
+## 📚 Additional Resources
+
+- Full debugging guide: See `WHITE_SCREEN_DEBUG_GUIDE.md`
+- Vite env vars: https://vitejs.dev/guide/env-and-mode.html
+- Clerk setup: https://clerk.com/docs

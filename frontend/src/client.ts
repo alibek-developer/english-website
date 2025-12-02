@@ -1033,4 +1033,12 @@ export enum ErrCode {
     Unauthenticated = "unauthenticated",
 }
 
-export default new Client(import.meta.env.VITE_CLIENT_TARGET, { requestInit: { credentials: "include" } });
+const ENCORE_BASE_URL: BaseURL =
+  import.meta.env.VITE_API_URL ||
+  import.meta.env.VITE_API_BASE_URL ||
+  import.meta.env.VITE_CLIENT_TARGET ||
+  Local;
+
+export default new Client(ENCORE_BASE_URL, {
+  requestInit: { credentials: "include" },
+});

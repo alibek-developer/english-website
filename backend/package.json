@@ -1,25 +1,25 @@
 {
-	"name": "backend",
-	"version": "1.0.0",
-	"type": "module",
-	"packageManager": "bun",
-	"scripts": {
-		"dev": "bun run src/index.ts",
-		"start": "bun run src/index.ts"
-	},
-	"dependencies": {
-		"@clerk/backend": "^1.27.0",
-		"encore.dev": "^1.51.11",
-		"@prisma/client": "^6.2.0",
-		"stripe": "^17.5.0",
-		"uploadthing": "^7.6.1"
-	},
-	"devDependencies": {
-		"typescript": "^5.8.3",
-		"prisma": "^6.2.0",
-		"@types/node": "^22.0.0"
-	},
-	"prisma": {
-		"seed": "tsx prisma/seed.ts"
-	}
+  "name": "backend",
+  "version": "1.0.0",
+  "type": "module",
+  "packageManager": "bun",
+  "scripts": {
+    "dev": "bun run src/index.ts",
+    "start": "bun run src/index.ts"
+  },
+  "dependencies": {
+    "@clerk/backend": "^1.27.0",
+    "encore.dev": "^1.52.1",
+    "@prisma/client": "^6.2.0",
+    "stripe": "^17.5.0",
+    "uploadthing": "^7.6.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3",
+    "prisma": "^6.2.0",
+    "@types/node": "^22.0.0"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  }
 }

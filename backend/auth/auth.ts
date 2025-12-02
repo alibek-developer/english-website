@@ -3,8 +3,13 @@ import { Header, APIError, Gateway } from "encore.dev/api";
 import { authHandler } from "encore.dev/auth";
 import { secret } from "encore.dev/config";
 
-const clerkSecretKey = secret("ClerkSecretKey");
-const clerkClient = createClerkClient({ secretKey: clerkSecretKey() });
+// Prefer explicit env var in local/dev, fall back to Encore secret in cloud.
+const encoreClerkSecret = secret("ClerkSecretKey");
+const envClerkSecret = process.env.CLERK_SECRET_KEY;
+
+const getClerkSecretKey = () => envClerkSecret || encoreClerkSecret();
+
+const clerkClient = createClerkClient({ secretKey: getClerkSecretKey() });
 
 interface AuthParams {
   authorization?: Header<"Authorization">;
@@ -24,7 +29,7 @@ export const auth = authHandler<AuthParams, AuthData>(
 
     try {
       const verifiedToken = await verifyToken(token, {
-        secretKey: clerkSecretKey(),
+        secretKey: getClerkSecretKey(),
       });
 
       const user = await clerkClient.users.getUser(verifiedToken.sub);
