@@ -2,7 +2,6 @@ import { Footer } from '@/components/Footer'
 import { Navigation } from '@/components/Navigation'
 import { ScrollToTop } from '@/components/ScrollToTop'
 import { Toaster } from '@/components/ui/toaster'
-
 import { WhatsAppButton } from '@/components/WhatsAppButton'
 import { ThemeProvider } from '@/hooks/useTheme'
 import { AboutPage } from '@/pages/AboutPage'
