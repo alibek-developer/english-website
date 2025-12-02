@@ -39,9 +39,36 @@ export function AdminPage() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
+  const API_URL = import.meta.env.VITE_API_URL;
+
   const loginMutation = useMutation({
-    mutationFn: (data: { email: string; password: string }) =>
-      backend.admin.login(data),
+    mutationFn: async (data: { email: string; password: string }) => {
+      const url = `${API_URL}/auth/admin/login`;
+
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+        credentials: "include",
+      });
+
+      if (!response.ok) {
+        let message = "Serverda xatolik yuz berdi";
+        try {
+          const body = await response.json();
+          if (body?.error) {
+            message = body.error;
+          }
+        } catch {
+          // ignore JSON parse errors and use default message
+        }
+        throw new Error(message);
+      }
+
+      return (await response.json()) as { success: boolean; error?: string };
+    },
     onSuccess: (data) => {
       if (data.success) {
         setIsLoggedIn(true);
@@ -49,6 +76,8 @@ export function AdminPage() {
           title: "Muvaffaqiyatli!",
           description: "Admin panelga xush kelibsiz.",
         });
+        // Ensure we land on the admin panel even in production routing
+        navigate("/admin", { replace: true });
       } else {
         toast({
           title: "Xatolik",
@@ -56,6 +85,17 @@ export function AdminPage() {
           variant: "destructive",
         });
       }
+    },
+    onError: (error: unknown) => {
+      const message =
+        error instanceof Error
+          ? error.message
+          : "Login paytida kutilmagan xatolik yuz berdi";
+      toast({
+        title: "Xatolik",
+        description: message,
+        variant: "destructive",
+      });
     },
   });
 
