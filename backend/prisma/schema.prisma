@@ -2,14 +2,19 @@
 // All database operations use Encore's SQL migrations in backend/db/migrations/
 // To use Prisma, you would need to sync this schema with the migrations
 
+
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+
+
+
 
 // Note: This schema is not actively used
 // The actual database schema is defined in backend/db/migrations/001_create_tables.up.sql

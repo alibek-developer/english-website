@@ -1,20 +1,13 @@
 import axios from 'axios'
 
-// Unified env variable resolution - matches client.ts
+// Railway yoki Vite env dagi backend URL
 const API_BASE_URL =
 	import.meta.env.VITE_API_URL ||
-	import.meta.env.VITE_API_BASE_URL ||
-	import.meta.env.VITE_CLIENT_TARGET ||
-	'http://localhost:4000'
+	import.meta.env.VITE_BACKEND_URL ||
+	'http://localhost:8080' // fallback to'g'ri HTTP URL
 
-if (
-	!import.meta.env.VITE_API_URL &&
-	!import.meta.env.VITE_API_BASE_URL &&
-	!import.meta.env.VITE_CLIENT_TARGET
-) {
-	console.warn(
-		'⚠️ No backend URL env var found. Using default: http://localhost:4000'
-	)
+if (!API_BASE_URL) {
+	console.warn('⚠️ API URL topilmadi. .env ichida VITE_API_URL ni kiriting.')
 }
 
 export const api = axios.create({
@@ -24,4 +17,5 @@ export const api = axios.create({
 		'Content-Type': 'application/json',
 	},
 })
+
 console.log('API_BASE_URL ->', API_BASE_URL)
