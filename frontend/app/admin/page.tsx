@@ -1,6 +1,5 @@
-import { AdminPage } from "@/pages/AdminPage";
+import { AdminPage } from '@/pages/AdminPage'
 
 export default function AdminPageRoute() {
-  return <AdminPage />;
+	return <AdminPage />
 }
-

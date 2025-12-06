@@ -1,6 +1,5 @@
-import { TeacherPage } from "@/pages/TeacherPage";
+import { TeacherPage } from '@/pages/TeacherPage'
 
 export default function TeacherPageRoute() {
-  return <TeacherPage />;
+	return <TeacherPage />
 }
-
