@@ -1,4 +1,4 @@
-import { TeacherPage } from '@/pages/TeacherPage'
+import { TeacherPage } from '@/views/TeacherPage'
 
 export default function TeacherPageRoute() {
 	return <TeacherPage />

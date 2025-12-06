@@ -1,4 +1,4 @@
-import { DashboardPage } from '@/pages/DashboardPage'
+import { DashboardPage } from '@/views/DashboardPage'
 import { auth } from '@clerk/nextjs/server'
 import { redirect } from 'next/navigation'
 

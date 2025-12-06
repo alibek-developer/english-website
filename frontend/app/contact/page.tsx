@@ -1,6 +1,5 @@
-import { ContactPage } from "@/pages/ContactPage";
+import { ContactPage } from '@/views/ContactPage'
 
 export default function ContactPageRoute() {
-  return <ContactPage />;
+	return <ContactPage />
 }
-

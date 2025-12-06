@@ -1,6 +1,5 @@
-import { CoursesPage } from "@/pages/CoursesPage";
+import { CoursesPage } from '@/views/CoursesPage'
 
 export default function CoursesPageRoute() {
-  return <CoursesPage />;
+	return <CoursesPage />
 }
-
