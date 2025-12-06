@@ -1,1 +1,0 @@
-(globalThis.TURBOPACK||(globalThis.TURBOPACK=[])).push(["object"==typeof document?document.currentScript:void 0,67044,t=>{"use strict";let o=t.i(5721).SWRConfig;t.s(["S",()=>o])}]);

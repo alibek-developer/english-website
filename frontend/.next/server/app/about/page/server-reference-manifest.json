@@ -1,6 +1,6 @@
 {
   "node": {
-    "7f23ba0af855eaaf68736f3d5377d142bb7773b2f4": {
+    "7ff5dacc71b5c04474503680161fe2d63c431c537e": {
       "workers": {
         "app/about/page": {
           "moduleId": 67261,
@@ -15,7 +15,7 @@
       "exportedName": "detectKeylessEnvDriftAction",
       "filename": "node_modules/@clerk/nextjs/dist/esm/app-router/keyless-actions.js"
     },
-    "7f1553e99508b80578b44e1adbe634f2f97a7ca2e0": {
+    "7f75acf3104efd4d13ecb9c462615bd30444c374c9": {
       "workers": {
         "app/about/page": {
           "moduleId": 67261,
@@ -30,7 +30,7 @@
       "exportedName": "invalidateCacheAction",
       "filename": "node_modules/@clerk/nextjs/dist/esm/app-router/server-actions.js"
     },
-    "7f00c267f7dd5dd9ec9c3a8e269b91016afe7197a3": {
+    "7ffd71b880e880c2ecfe8d8ac498fcf3c9228d572a": {
       "workers": {
         "app/about/page": {
           "moduleId": 67261,
@@ -45,22 +45,7 @@
       "exportedName": "createOrReadKeylessAction",
       "filename": "node_modules/@clerk/nextjs/dist/esm/app-router/keyless-actions.js"
     },
-    "7f0b96aa5027ba9d04146f38f3e8f931c6621daf86": {
-      "workers": {
-        "app/about/page": {
-          "moduleId": 67261,
-          "async": false,
-          "exportedName": "formatMetadataHeaders",
-          "filename": "node_modules/@clerk/nextjs/dist/esm/server/keyless-custom-headers.js"
-        }
-      },
-      "layer": {
-        "app/about/page": "rsc"
-      },
-      "exportedName": "formatMetadataHeaders",
-      "filename": "node_modules/@clerk/nextjs/dist/esm/server/keyless-custom-headers.js"
-    },
-    "7fa46623667298871e590437d465ec6d3f76c8bd6c": {
+    "7f1b01a490189aeef7cbfbac9f1c8d03089e8e521b": {
       "workers": {
         "app/about/page": {
           "moduleId": 67261,
@@ -75,7 +60,22 @@
       "exportedName": "collectKeylessMetadata",
       "filename": "node_modules/@clerk/nextjs/dist/esm/server/keyless-custom-headers.js"
     },
-    "7f122519932af30e9ea35be8e97091b5e6596f6111": {
+    "7fbdc7e755f1ee4411a7dfd96d119e16db5e148173": {
+      "workers": {
+        "app/about/page": {
+          "moduleId": 67261,
+          "async": false,
+          "exportedName": "formatMetadataHeaders",
+          "filename": "node_modules/@clerk/nextjs/dist/esm/server/keyless-custom-headers.js"
+        }
+      },
+      "layer": {
+        "app/about/page": "rsc"
+      },
+      "exportedName": "formatMetadataHeaders",
+      "filename": "node_modules/@clerk/nextjs/dist/esm/server/keyless-custom-headers.js"
+    },
+    "7f11c6d996e00d8069183b654ef9ce566443db0104": {
       "workers": {
         "app/about/page": {
           "moduleId": 67261,
@@ -90,7 +90,7 @@
       "exportedName": "syncKeylessConfigAction",
       "filename": "node_modules/@clerk/nextjs/dist/esm/app-router/keyless-actions.js"
     },
-    "7fb49c455164b6d27fc9f9d41cbb4a98fd91e3b789": {
+    "7f7752421458f92396847e58f0868b845c3a1f7c34": {
       "workers": {
         "app/about/page": {
           "moduleId": 67261,

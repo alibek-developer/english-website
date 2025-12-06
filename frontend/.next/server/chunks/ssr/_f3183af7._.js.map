@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../../../frontend/app/about/page.tsx"],"sourcesContent":["import { AboutPage } from '@/views/AboutPage'\r\n\r\nexport default function AboutPageRoute() {\r\n\treturn <AboutPage />\r\n}\r\n"],"names":[],"mappings":""}

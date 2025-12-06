@@ -22,9 +22,7 @@
 		"baseUrl": ".",
 		"paths": {
 			"@/*": ["./src/*", "./app/*"],
-			"~backend/client": ["./src/client.ts"],
 			"~backend/*": ["../backend/*"],
-			"~encore/*": ["../backend/encore.gen/*"]
 		},
 		"types": ["node"]
 	},

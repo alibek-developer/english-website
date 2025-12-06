@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../../../frontend/app/payment-cancel/page.tsx"],"sourcesContent":["import { PaymentCancelPage } from '@/views/PaymentCancelPage'\r\n\r\nexport default function PaymentCancelPageRoute() {\r\n\treturn <PaymentCancelPage />\r\n}\r\n"],"names":[],"mappings":""}

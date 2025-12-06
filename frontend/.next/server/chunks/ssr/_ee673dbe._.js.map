@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../../../frontend/app/courses/page.tsx"],"sourcesContent":["import { CoursesPage } from '@/views/CoursesPage'\r\n\r\nexport default function CoursesPageRoute() {\r\n\treturn <CoursesPage />\r\n}\r\n"],"names":[],"mappings":""}

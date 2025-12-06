@@ -1,4 +1,3 @@
-import { ScrollToTop } from '@/components/ScrollToTop'
 import { Toaster } from '@/components/ui/toaster'
 import { WhatsAppButton } from '@/components/WhatsAppButton'
 import {
@@ -44,7 +43,6 @@ export default function RootLayout({
 							{children}
 							<Footer />
 							<WhatsAppButton />
-							<ScrollToTop />
 							<Toaster />
 						</div>
 					</Providers>

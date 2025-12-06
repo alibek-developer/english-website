@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../../../frontend/app/admin/page.tsx"],"sourcesContent":["import { AdminPage } from '@/views/AdminPage'\r\n\r\nexport default function AdminPageRoute() {\r\n\treturn <AdminPage />\r\n}\r\n"],"names":[],"mappings":""}

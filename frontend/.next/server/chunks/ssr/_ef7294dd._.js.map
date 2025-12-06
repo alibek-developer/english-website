@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../../../frontend/app/resources/page.tsx"],"sourcesContent":["import { ResourcesPage } from '@/views/ResourcesPage'\r\n\r\nexport default function ResourcesPageRoute() {\r\n\treturn <ResourcesPage />\r\n}\r\n"],"names":[],"mappings":""}
