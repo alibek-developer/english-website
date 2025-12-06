@@ -14,7 +14,7 @@
 	"dependencies": {
 		"@clerk/nextjs": "latest",
 		"@clerk/clerk-react": "^5.35.2",
-		"next": "^latest",
+		"next": "latest",
 		"@radix-ui/react-dialog": "^1.1.14",
 		"@radix-ui/react-label": "^2.1.2",
 		"@radix-ui/react-select": "^2.2.5",
