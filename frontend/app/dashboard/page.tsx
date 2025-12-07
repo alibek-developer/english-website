@@ -1,13 +1,5 @@
 import { DashboardPage } from '@/views/DashboardPage'
-import { auth } from '@clerk/nextjs/server'
-import { redirect } from 'next/navigation'
 
-export default async function DashboardPageRoute() {
-	const { userId } = await auth()
-
-	if (!userId) {
-		redirect('/login')
-	}
-
+export default function DashboardPageRoute() {
 	return <DashboardPage />
 }

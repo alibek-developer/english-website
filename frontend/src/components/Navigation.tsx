@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -8,7 +9,7 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
-  const location = useLocation();
+  const pathname = usePathname();
   const { language, setLanguage, t } = useLanguage();
 
   const navItems = [
@@ -23,7 +24,7 @@ export function Navigation() {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 dark:bg-slate-950/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors duration-300">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          <Link to="/" className="flex items-center gap-3">
+          <Link href="/" className="flex items-center gap-3">
             <div className="w-10 h-10 bg-sky-600 rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-xl">A</span>
             </div>
@@ -39,13 +40,13 @@ export function Navigation() {
                 key={item.path}
                 to={item.path}
                 className={`text-sm font-medium transition-colors relative ${
-                  location.pathname === item.path
+                  pathname === item.path
                     ? "text-sky-600 dark:text-sky-400"
                     : "text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white"
                 }`}
               >
                 {item.labelUz}
-                {location.pathname === item.path && (
+                {pathname === item.path && (
                   <motion.div
                     layoutId="activeNav"
                     className="absolute -bottom-6 left-0 right-0 h-0.5 bg-sky-600 dark:bg-sky-400"
@@ -92,7 +93,7 @@ export function Navigation() {
                   to={item.path}
                   onClick={() => setIsOpen(false)}
                   className={`block px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
-                    location.pathname === item.path
+                    pathname === item.path
                       ? "bg-sky-50 dark:bg-sky-950 text-sky-600 dark:text-sky-400"
                       : "text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-900"
                   }`}

@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../../../../frontend/app/teacher/page.tsx"],"sourcesContent":["import { TeacherPage } from '@/views/TeacherPage'\r\n\r\nexport default function TeacherPageRoute() {\r\n\treturn <TeacherPage />\r\n}\r\n"],"names":[],"mappings":""}

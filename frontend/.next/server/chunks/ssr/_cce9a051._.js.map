@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../../../../frontend/app/contact/page.tsx"],"sourcesContent":["import { ContactPage } from '@/views/ContactPage'\r\n\r\nexport default function ContactPageRoute() {\r\n\treturn <ContactPage />\r\n}\r\n"],"names":[],"mappings":""}

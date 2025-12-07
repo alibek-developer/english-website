@@ -3,6 +3,7 @@
 import { ThemeToggle } from '@/components/ThemeToggle'
 import { Button } from '@/components/ui/button'
 import { useLanguage } from '@/hooks/useLanguage'
+import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Globe, Menu, X } from 'lucide-react'
 import Link from 'next/link'
@@ -78,6 +79,17 @@ export function Navigation() {
 							<span className='hidden sm:inline'>{language.toUpperCase()}</span>
 						</Button>
 
+						<SignedOut>
+							<SignInButton mode="modal">
+								<Button variant="outline" size="sm">
+									{t('login', 'Login')}
+								</Button>
+							</SignInButton>
+						</SignedOut>
+						<SignedIn>
+							<UserButton afterSignOutUrl="/" />
+						</SignedIn>
+
 						<button
 							onClick={() => setIsOpen(!isOpen)}
 							className='md:hidden p-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
@@ -115,6 +127,20 @@ export function Navigation() {
 									{item.labelUz}
 								</Link>
 							))}
+							<div className="pt-4 border-t border-slate-200 dark:border-slate-800">
+								<SignedOut>
+									<SignInButton mode="modal">
+										<Button variant="outline" size="sm" className="w-full">
+											{t('login', 'Login')}
+										</Button>
+									</SignInButton>
+								</SignedOut>
+								<SignedIn>
+									<div className="flex justify-center">
+										<UserButton afterSignOutUrl="/" />
+									</div>
+								</SignedIn>
+							</div>
 						</div>
 					</motion.div>
 				)}

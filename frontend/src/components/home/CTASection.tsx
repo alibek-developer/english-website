@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, MessageCircle } from "lucide-react";
 
@@ -25,7 +25,7 @@ export function CTASection() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/contact">
+              <Link href="/contact">
                 <Button size="lg" variant="secondary" className="gap-2 text-base px-8 py-6">
                   Bepul Konsultatsiya
                   <ArrowRight className="w-5 h-5" />

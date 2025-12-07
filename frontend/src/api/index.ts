@@ -1,0 +1,10 @@
+export * from './admin'
+export * from './auth'
+export * from './contact'
+export * from './courses'
+export * from './payments'
+export * from './testimonials'
+export * from './users'
+
+export { axiosInstance } from './axios'
+export { default as backend } from './backend'

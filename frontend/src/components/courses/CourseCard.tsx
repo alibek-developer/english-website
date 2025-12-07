@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { CourseModal } from "./CourseModal";
 import { ScheduleModal } from "./ScheduleModal";
-import type { Course } from "~backend/courses/list";
+import type { Course } from "@/types/course";
 import { useLanguage } from "@/hooks/useLanguage";
 
 interface CourseCardProps {

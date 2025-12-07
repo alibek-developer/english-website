@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../../../../frontend/app/payment-success/page.tsx"],"sourcesContent":["import { PaymentSuccessPage } from '@/views/PaymentSuccessPage'\r\n\r\nexport default function PaymentSuccessPageRoute() {\r\n\treturn <PaymentSuccessPage />\r\n}\r\n"],"names":[],"mappings":""}

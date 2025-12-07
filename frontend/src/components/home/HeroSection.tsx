@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Award, Users, TrendingUp } from "lucide-react";
 import { useEffect, useRef } from "react";
@@ -59,12 +59,12 @@ export function HeroSection() {
             </p>
 
             <div className="flex flex-wrap gap-4 mb-12">
-              <Link to="/courses">
+              <Link href="/courses">
                 <Button size="lg" className="text-base px-8 py-6 bg-sky-600 hover:bg-sky-700">
                   Kurslar
                 </Button>
               </Link>
-              <Link to="/contact">
+              <Link href="/contact">
                 <Button size="lg" variant="outline" className="text-base px-8 py-6 border-2">
                   Bepul Konsultatsiya
                 </Button>

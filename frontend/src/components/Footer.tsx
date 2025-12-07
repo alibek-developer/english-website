@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { Instagram, Facebook, Youtube, Mail, Phone, MapPin } from "lucide-react";
 
 export function Footer() {
@@ -24,11 +24,11 @@ export function Footer() {
           <div>
             <h3 className="font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2 text-sm text-slate-400">
-              <li><Link to="/" className="hover:text-white transition-colors">Home</Link></li>
-              <li><Link to="/courses" className="hover:text-white transition-colors">Courses</Link></li>
-              <li><Link to="/about" className="hover:text-white transition-colors">About</Link></li>
-              <li><Link to="/resources" className="hover:text-white transition-colors">Resources</Link></li>
-              <li><Link to="/contact" className="hover:text-white transition-colors">Contact</Link></li>
+              <li><Link href="/" className="hover:text-white transition-colors">Home</Link></li>
+              <li><Link href="/courses" className="hover:text-white transition-colors">Courses</Link></li>
+              <li><Link href="/about" className="hover:text-white transition-colors">About</Link></li>
+              <li><Link href="/resources" className="hover:text-white transition-colors">Resources</Link></li>
+              <li><Link href="/contact" className="hover:text-white transition-colors">Contact</Link></li>
             </ul>
           </div>
 

@@ -1,30 +1,30 @@
 'use client'
 
-import { motion } from 'framer-motion'
-
 export function AboutPage() {
-	return (
-		<div className="min-h-screen pt-20 pb-16">
-			<div className="container mx-auto px-4 sm:px-6 lg:px-8">
-				<motion.div
-					initial={{ opacity: 0, y: 20 }}
-					animate={{ opacity: 1, y: 0 }}
-					transition={{ duration: 0.6 }}
-					className="max-w-4xl mx-auto text-center"
-				>
-					<h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-8">
-						<span className="text-sky-600">Men haqimda</span>
-					</h1>
-					<div className="prose prose-lg mx-auto text-left">
-						<p className="text-lg text-slate-600 mb-6">
-							Assalomu alaykum! Men Alibek Allaberganov, professional ingliz tili o'qituvchisi va IELTS eksperti.
-						</p>
-						<p className="text-lg text-slate-600 mb-6">
-							8+ yillik tajriba va 1000+ muvaffaqiyatli o'quvchi bilan, sizga individual yondashuv va eng zamonaviy o'quv usullarini taklif qilaman.
-						</p>
-					</div>
-				</motion.div>
-			</div>
-		</div>
-	)
+  return (
+    <div className="min-h-screen py-12">
+      <div className="container mx-auto px-4">
+        <h1 className="text-3xl font-bold mb-8">About Us</h1>
+        <div className="prose max-w-4xl">
+          <p className="text-lg mb-6">
+            Welcome to our English learning platform. We provide comprehensive IELTS preparation
+            and English language courses taught by experienced professionals.
+          </p>
+
+          <h2 className="text-2xl font-semibold mb-4">Our Mission</h2>
+          <p className="mb-6">
+            To help students achieve their IELTS goals and master the English language through
+            personalized, effective teaching methods.
+          </p>
+
+          <h2 className="text-2xl font-semibold mb-4">Our Approach</h2>
+          <p className="mb-6">
+            We combine modern teaching techniques with proven methodologies to ensure our students
+            not only pass their exams but truly understand and speak English fluently.
+          </p>
+        </div>
+      </div>
+    </div>
+  )
 }
+
