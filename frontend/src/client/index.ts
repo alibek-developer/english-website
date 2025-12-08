@@ -2,7 +2,7 @@ import axios from 'axios'
 
 // Axios instance with proper configuration
 export const api = axios.create({
-	baseURL: process.env.NEXT_PUBLIC_API_URL,
+	baseURL: 'https://backend-c28d.onrender.com',
 	withCredentials: true,
 })
 

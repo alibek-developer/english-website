@@ -1,3 +1,5 @@
+'use client'
+
 import { Button } from '@/components/ui/button'
 import { motion } from 'framer-motion'
 import lottie from 'lottie-web'
@@ -9,9 +11,9 @@ export function HeroSection() {
 	const lottieContainer = useRef<HTMLDivElement>(null)
 
 	const trustBadges = [
-		{ icon: Users, text: '1000+ Students', textUz: '1000+ talaba' },
-		{ icon: TrendingUp, text: '8+ Years', textUz: '8+ yil tajriba' },
-		{ icon: Award, text: 'IELTS 8.5', textUz: 'IELTS 8.5' },
+		{ icon: Users, textUz: '1000+ talaba' },
+		{ icon: TrendingUp, textUz: '8+ yil tajriba' },
+		{ icon: Award, textUz: 'IELTS 8.5' },
 	]
 
 	useEffect(() => {
@@ -21,8 +23,9 @@ export function HeroSection() {
 				renderer: 'svg',
 				loop: true,
 				autoplay: true,
-				path: 'https://lottie.host/dfbe5e06-7db1-4a93-84c1-d87a84e36076/yIi0VZJfLk.json',
+				path: 'https://assets10.lottiefiles.com/packages/lf20_tfb3estd.json',
 			})
+
 			return () => anim.destroy()
 		}
 	}, [])
@@ -33,6 +36,7 @@ export function HeroSection() {
 
 			<div className='container mx-auto px-4 sm:px-6 lg:px-8 relative z-10'>
 				<div className='grid lg:grid-cols-2 gap-12 items-center'>
+					{/* LEFT TEXT SIDE */}
 					<motion.div
 						initial={{ opacity: 0, y: 30 }}
 						animate={{ opacity: 1, y: 0 }}
@@ -61,6 +65,7 @@ export function HeroSection() {
 							erishing
 						</p>
 
+						{/* BUTTONS */}
 						<div className='flex flex-wrap gap-4 mb-12'>
 							<Link href='/courses'>
 								<Button
@@ -70,6 +75,7 @@ export function HeroSection() {
 									Kurslar
 								</Button>
 							</Link>
+
 							<Link href='/contact'>
 								<Button
 									size='lg'
@@ -81,6 +87,7 @@ export function HeroSection() {
 							</Link>
 						</div>
 
+						{/* TRUST BADGES */}
 						<div className='flex flex-wrap gap-6'>
 							{trustBadges.map((badge, index) => (
 								<motion.div
@@ -101,6 +108,7 @@ export function HeroSection() {
 						</div>
 					</motion.div>
 
+					{/* RIGHT ANIMATION SIDE */}
 					<motion.div
 						initial={{ opacity: 0, x: 30 }}
 						animate={{ opacity: 1, x: 0 }}

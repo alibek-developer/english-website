@@ -9,7 +9,7 @@ import Link from 'next/link'
 export function FeaturedCourses() {
 	const { data } = useQuery({
 		queryKey: ['courses'],
-		queryFn: () => backend.get('/courses'),
+		queryFn: () => backend.get('/courses').then(res => res.data),
 	})
 
 	const featuredCourses = data?.data?.courses?.slice(0, 3)

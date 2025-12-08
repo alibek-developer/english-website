@@ -1,16 +1,11 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
-  "/dashboard/page": "app/dashboard/page.js",
-  "/admin/page": "app/admin/page.js",
   "/courses/page": "app/courses/page.js",
-  "/login/page": "app/login/page.js",
-  "/(auth)/sign-in/[[...sign-in]]/page": "app/(auth)/sign-in/[[...sign-in]]/page.js",
+  "/page": "app/page.js",
+  "/resources/page": "app/resources/page.js",
   "/contact/page": "app/contact/page.js",
   "/about/page": "app/about/page.js",
-  "/payment-success/page": "app/payment-success/page.js",
-  "/payment-cancel/page": "app/payment-cancel/page.js",
-  "/page": "app/page.js",
-  "/(auth)/sign-up/[[...sign-up]]/page": "app/(auth)/sign-up/[[...sign-up]]/page.js",
-  "/teacher/page": "app/teacher/page.js",
-  "/resources/page": "app/resources/page.js"
+  "/login/page": "app/login/page.js",
+  "/(auth)/sign-in/[[...sign-in]]/page": "app/(auth)/sign-in/[[...sign-in]]/page.js",
+  "/admin/page": "app/admin/page.js"
 }
