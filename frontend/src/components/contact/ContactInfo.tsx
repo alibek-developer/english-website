@@ -1,3 +1,5 @@
+'use client'
+
 import { Clock, Mail, MapPin, Phone } from 'lucide-react'
 
 export function ContactInfo() {
