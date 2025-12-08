@@ -1,4 +1,3 @@
-import { ClerkProvider } from '@clerk/nextjs'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { Footer } from './components/NextFooter'
@@ -20,16 +19,14 @@ export default function RootLayout({
 	children: React.ReactNode
 }) {
 	return (
-		<ClerkProvider>
-			<html lang='en'>
-				<body className={inter.className}>
-					<Providers>
-						<Navigation />
-						<main className='pt-20'>{children}</main>
-						<Footer />
-					</Providers>
-				</body>
-			</html>
-		</ClerkProvider>
+		<html lang='en'>
+			<body className={inter.className}>
+				<Providers>
+					<Navigation />
+					<main className='pt-20'>{children}</main>
+					<Footer />
+				</Providers>
+			</body>
+		</html>
 	)
 }

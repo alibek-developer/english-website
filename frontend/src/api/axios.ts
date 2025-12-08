@@ -8,10 +8,7 @@ import axios, { AxiosInstance } from 'axios'
  * 2. NEXT_PUBLIC_BACKEND_URL (fallback)
  * 3. http://localhost:8080 (development fallback)
  */
-const API_BASE_URL =
-	process.env.NEXT_PUBLIC_API_URL ||
-	process.env.NEXT_PUBLIC_BACKEND_URL ||
-	'http://localhost:8080'
+const API_BASE_URL = 'https://backend-c28d.onrender.com'
 
 /**
  * Axios instance configuration

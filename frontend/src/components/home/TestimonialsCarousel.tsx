@@ -1,41 +1,61 @@
-import backend from '@/client'
+'use client'
+
 import { Button } from '@/components/ui/button'
-import { useQuery } from '@tanstack/react-query'
 import { motion } from 'framer-motion'
-import { ChevronLeft, ChevronRight, Star, TrendingUp } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Star } from 'lucide-react'
 import { useEffect, useState } from 'react'
 
-export function TestimonialsCarousel() {
-	const { data } = useQuery({
-		queryKey: ['testimonials'],
-		queryFn: () => backend.testimonials.list(),
-	})
+interface Testimonial {
+	_id: string
+	name: string
+	message: string
+	createdAt: number
+}
 
+export function TestimonialsCarousel() {
+	// Fake data for now - replace with API call later
+	const items: Testimonial[] = [
+		{
+			_id: '1',
+			name: 'Ali Ahmedov',
+			message: "Bu kurs mening hayotimni o'zgartirdi. Rahmat!",
+			createdAt: Date.now(),
+		},
+		{
+			_id: '2',
+			name: 'Malika Karimova',
+			message: 'Juda foydali kurs. Barcha savollarimga javob oldim.',
+			createdAt: Date.now(),
+		},
+		{
+			_id: '3',
+			name: 'Rustam Bekov',
+			message: "Professional o'qituvchi va ajoyib materiallar.",
+			createdAt: Date.now(),
+		},
+	]
 	const [currentIndex, setCurrentIndex] = useState(0)
 
-	const testimonials = data || []
-
 	useEffect(() => {
-		if (testimonials.length === 0) return
+		if (items.length === 0) return
 
-		const interval = setInterval(() => {
-			setCurrentIndex(prev => (prev + 1) % testimonials.length)
-		}, 5000)
+		const interval = setInterval(
+			() => setCurrentIndex(prev => (prev + 1) % items.length),
+			5000
+		)
 
 		return () => clearInterval(interval)
-	}, [testimonials.length])
+	}, [items.length])
 
 	const next = () => {
-		setCurrentIndex(prev => (prev + 1) % testimonials.length)
+		setCurrentIndex(prev => (prev + 1) % items.length)
 	}
 
 	const prev = () => {
-		setCurrentIndex(
-			prev => (prev - 1 + testimonials.length) % testimonials.length
-		)
+		setCurrentIndex(prev => (prev - 1 + items.length) % items.length)
 	}
 
-	if (testimonials.length === 0) return null
+	if (items.length === 0) return null
 
 	return (
 		<section className='py-20 bg-slate-50'>
@@ -51,7 +71,7 @@ export function TestimonialsCarousel() {
 						Talabalar <span className='text-sky-600'>Fikrlari</span>
 					</h2>
 					<p className='text-lg text-slate-600'>
-						Mening talabalarimning muvaffaqiyatlari va fikrilarini o'qing
+						Mening talabalarimning muvaffaqiyatlari va fikrlarini o'qing
 					</p>
 				</motion.div>
 
@@ -66,27 +86,16 @@ export function TestimonialsCarousel() {
 					>
 						<div className='flex flex-col md:flex-row gap-8 items-center md:items-start'>
 							<div className='flex-shrink-0'>
-								<div className='w-24 h-24 rounded-full bg-slate-200 overflow-hidden'>
-									{testimonials[currentIndex].image ? (
-										<img
-											src={testimonials[currentIndex].image}
-											alt={testimonials[currentIndex].studentNameUz}
-											className='w-full h-full object-cover'
-											onError={e => {
-												e.currentTarget.src = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96'%3E%3Crect fill='%23E0F2FE' width='96' height='96'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%230F172A' font-size='32'%3E${testimonials[currentIndex].studentNameUz[0]}%3C/text%3E%3C/svg%3E`
-											}}
-										/>
-									) : (
-										<div className='w-full h-full flex items-center justify-center text-3xl font-bold text-slate-600'>
-											{testimonials[currentIndex].studentNameUz[0]}
-										</div>
-									)}
+								<div className='w-24 h-24 rounded-full bg-sky-100 flex items-center justify-center'>
+									<span className='text-2xl font-bold text-sky-600'>
+										{items[currentIndex].name[0].toUpperCase()}
+									</span>
 								</div>
 							</div>
 
 							<div className='flex-1 text-center md:text-left'>
 								<div className='flex justify-center md:justify-start gap-1 mb-4'>
-									{[...Array(testimonials[currentIndex].rating)].map((_, i) => (
+									{[...Array(5)].map((_, i) => (
 										<Star
 											key={i}
 											className='w-5 h-5 fill-yellow-400 text-yellow-400'
@@ -95,29 +104,16 @@ export function TestimonialsCarousel() {
 								</div>
 
 								<p className='text-lg text-slate-700 mb-6 leading-relaxed'>
-									"{testimonials[currentIndex].testimonialUz}"
+									"{items[currentIndex].message}"
 								</p>
 
 								<div className='flex flex-col sm:flex-row items-center gap-4'>
 									<div>
 										<div className='font-semibold text-slate-900'>
-											{testimonials[currentIndex].studentNameUz}
+											{items[currentIndex].name}
 										</div>
-										<div className='text-sm text-slate-500'>
-											{testimonials[currentIndex].course}
-										</div>
+										<div className='text-sm text-slate-500'>Student</div>
 									</div>
-
-									{testimonials[currentIndex].beforeScore &&
-										testimonials[currentIndex].afterScore && (
-											<div className='flex items-center gap-2 px-4 py-2 bg-sky-50 rounded-lg'>
-												<TrendingUp className='w-4 h-4 text-sky-600' />
-												<span className='text-sm font-medium text-slate-700'>
-													{testimonials[currentIndex].beforeScore} →{' '}
-													{testimonials[currentIndex].afterScore}
-												</span>
-											</div>
-										)}
 								</div>
 							</div>
 						</div>
@@ -134,7 +130,7 @@ export function TestimonialsCarousel() {
 						</Button>
 
 						<div className='flex items-center gap-2'>
-							{testimonials.map((_, index) => (
+							{items.map((_, index) => (
 								<button
 									key={index}
 									onClick={() => setCurrentIndex(index)}

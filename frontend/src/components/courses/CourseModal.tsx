@@ -7,7 +7,6 @@ import {
 	DialogTitle,
 } from '@/components/ui/dialog'
 import { useToast } from '@/components/ui/use-toast'
-import { useBackend } from '@/hooks/useBackend'
 import { useLanguage } from '@/hooks/useLanguage'
 import type { Course } from '@/types/course'
 import { useMutation } from '@tanstack/react-query'
@@ -23,7 +22,6 @@ interface CourseModalProps {
 
 export function CourseModal({ course, isOpen, onClose }: CourseModalProps) {
 	const { language } = useLanguage()
-	const backend = useBackend()
 	const router = useRouter()
 	const { toast } = useToast()
 	const [selectedPayment, setSelectedPayment] = useState<string | null>(null)
@@ -32,7 +30,6 @@ export function CourseModal({ course, isOpen, onClose }: CourseModalProps) {
 	const description =
 		language === 'uz' ? course.descriptionUz : course.description
 
-	// Default features for courses
 	const defaultFeatures = [
 		'Professional instruction',
 		'Interactive lessons',
@@ -52,20 +49,34 @@ export function CourseModal({ course, isOpen, onClose }: CourseModalProps) {
 	}
 
 	const paymentMethods = [
-		{ name: 'Click', icon: Smartphone, url: 'https://click.uz' },
-		{ name: 'Payme', icon: Smartphone, url: 'https://payme.uz' },
-		{ name: 'Uzcard', icon: CreditCard, url: '#' },
-		{ name: 'Payze', icon: CreditCard, url: '#' },
+		{ name: 'Click', icon: Smartphone },
+		{ name: 'Payme', icon: Smartphone },
+		{ name: 'Uzcard', icon: CreditCard },
+		{ name: 'Payze', icon: CreditCard },
 	]
 
+	// NEW REST API VERSION — encore client o'chirilgan
 	const enrollMutation = useMutation({
-		mutationFn: (data: { courseId: number; paymentMethod: string }) =>
-			backend.student.enrollCourse(data),
+		mutationFn: async (data: { courseId: number; paymentMethod: string }) => {
+			const res = await fetch(
+				`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/student/enroll`,
+				{
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify(data),
+				}
+			)
+
+			if (!res.ok) throw new Error('Enroll failed')
+			return res.json()
+		},
+
 		onSuccess: () => {
 			const courseTitle = language === 'uz' ? course.titleUz : course.title
 			router.push(`/payment-success?course=${encodeURIComponent(courseTitle)}`)
 			onClose()
 		},
+
 		onError: error => {
 			console.error(error)
 			toast({
@@ -79,13 +90,11 @@ export function CourseModal({ course, isOpen, onClose }: CourseModalProps) {
 	})
 
 	const handlePayment = (method: string) => {
-		// For now, allow access without authentication
 		setSelectedPayment(method)
-
-		// For now use direct enrollment (Stripe integration requires client regeneration)
-		// After running: encore gen client --target leap --output ../frontend/client.ts
-		// Replace this with: checkoutMutation.mutate(course.id);
-		enrollMutation.mutate({ courseId: course.id, paymentMethod: method })
+		enrollMutation.mutate({
+			courseId: course.id,
+			paymentMethod: method,
+		})
 	}
 
 	return (

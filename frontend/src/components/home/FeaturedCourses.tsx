@@ -1,4 +1,4 @@
-import backend from '@/client'
+import { backend } from '@/client'
 import { CourseCard } from '@/components/courses/CourseCard'
 import { Button } from '@/components/ui/button'
 import { useQuery } from '@tanstack/react-query'
@@ -9,10 +9,10 @@ import Link from 'next/link'
 export function FeaturedCourses() {
 	const { data } = useQuery({
 		queryKey: ['courses'],
-		queryFn: () => backend.courses.getAll(),
+		queryFn: () => backend.get('/courses'),
 	})
 
-	const featuredCourses = data?.slice(0, 3)
+	const featuredCourses = data?.data?.courses?.slice(0, 3)
 
 	return (
 		<section className='py-20'>
@@ -34,7 +34,7 @@ export function FeaturedCourses() {
 				</motion.div>
 
 				<div className='grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12'>
-					{featuredCourses?.map((course, index) => (
+					{featuredCourses?.map((course: any, index: number) => (
 						<CourseCard key={course.id} course={course} index={index} />
 					))}
 				</div>

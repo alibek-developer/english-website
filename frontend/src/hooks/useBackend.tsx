@@ -1,5 +1,5 @@
-import backend from "@/client";
+import { backend } from '@/client'
 
 export function useBackend() {
-  return backend;
+	return backend
 }

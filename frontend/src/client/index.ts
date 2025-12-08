@@ -7,13 +7,13 @@ export const api = axios.create({
 })
 
 // Import all API modules
-import { auth } from '../api/auth'
 import { admin } from '../api/admin'
-import { courses } from '../api/courses'
-import { users } from '../api/users'
+import { auth } from '../api/auth'
 import { contact } from '../api/contact'
+import { courses } from '../api/courses'
 import { payments } from '../api/payments'
 import { testimonials } from '../api/testimonials'
+import { users } from '../api/users'
 
 // Student API (alias for courses enrollment methods)
 const student = {
