@@ -1,6 +1,6 @@
 {
+  "/courses/page": "app/courses/page.js",
   "/page": "app/page.js",
-  "/resources/page": "app/resources/page.js",
-  "/about/page": "app/about/page.js",
-  "/contact/page": "app/contact/page.js"
+  "/payment-cancel/page": "app/payment-cancel/page.js",
+  "/about/page": "app/about/page.js"
 }
