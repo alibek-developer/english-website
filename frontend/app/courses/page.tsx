@@ -1,70 +1,62 @@
-'use client'
+;('use client')
 
-import { CourseCard } from '@/components/courses/CourseCard'
-import { CourseModal } from '@/components/courses/CourseModal'
-import { ScheduleModal } from '@/components/courses/ScheduleModal'
-import { CourseType } from '@/types/course'
+import { CourseCard, CourseModal } from '@/components/courses'
+
+import { Course } from '@/types/course'
 
 import { useState } from 'react'
 
-const coursesData: CourseType[] = [
+const demoCourses: Course[] = [
 	{
 		id: 1,
-		title: 'IELTS intensiv kursi',
-		description:
-			'Bizning keng qamrovli IELTS dasturimiz bilan 7-9 bandga erishing',
-		duration: '3 oy',
-		price: "1 500 000 so'm",
-		image: '/images/ielts.jpg',
+		title: 'React Bootcamp',
+		description: 'React asoslarini 0 dan o’rgatamiz.',
+		image: '/react.png',
+		category: 'Frontend',
+		duration: '2 oy',
+		level: 'Boshlang’ich',
+		format: 'Offline',
+		startDate: '2025-01-15',
+		price: 500000,
+		schedule: [
+			{ day: 'Dushanba', time: '18:00 - 20:00' },
+			{ day: 'Chorshanba', time: '18:00 - 20:00' },
+		],
 	},
 	{
 		id: 2,
-		title: 'Umumiy ingliz (A1-C1)',
-		description: 'Ingliz tilini asosiydan yuqori darajagacha o‘rgating',
-		duration: '6 oy',
-		price: "900 000 so'm",
-		image: '/images/general.jpg',
-	},
-	{
-		id: 3,
-		title: 'Nutq klubi',
-		description: 'Gapirishni rivojlantirish uchun nutq klubi',
-		duration: '1 oy',
-		price: "400 000 so'm",
-		image: '/images/speaking.jpg',
+		title: 'Next.js Full Course',
+		description: 'Next.js + SSR + Routing + API Routes.',
+		category: 'Frontend',
+		price: 650000,
 	},
 ]
 
 export default function CoursesPage() {
-	const [openCourse, setOpenCourse] = useState<CourseType | null>(null)
-	const [openSchedule, setOpenSchedule] = useState<CourseType | null>(null)
+	const [modalCourse, setModalCourse] = useState<Course | null>(null)
+	const [isModalOpen, setIsModalOpen] = useState(false)
 
 	return (
-		<div className='w-full max-w-6xl mx-auto px-4 py-10'>
-			<h1 className='text-3xl font-bold mb-8 text-center'>Bizning kurslar</h1>
-
-			<div className='grid sm:grid-cols-2 lg:grid-cols-3 gap-6'>
-				{coursesData.map(course => (
-					<CourseCard
-						key={course.id}
-						course={course}
-						onOpenCourse={() => setOpenCourse(course)}
-						onOpenSchedule={() => setOpenSchedule(course)}
-					/>
-				))}
-			</div>
-			{openCourse && (
-				<CourseModal
-					open={!!openCourse}
-					course={openCourse}
-					onClose={() => setOpenCourse(null)}
+		<div className='grid grid-cols-1 md:grid-cols-2 gap-4 p-6'>
+			{demoCourses.map(course => (
+				<CourseCard
+					key={course.id}
+					course={course}
+					onOpenCourse={() => {
+						setModalCourse(course)
+						setIsModalOpen(true)
+					}}
+					onOpenSchedule={() => {
+						setModalCourse(course)
+						setIsModalOpen(true)
+					}}
 				/>
-			)}
+			))}
 
-			<ScheduleModal
-				open={!!openSchedule}
-				course={openSchedule}
-				onClose={() => setOpenSchedule(null)}
+			<CourseModal
+				course={modalCourse}
+				isOpen={isModalOpen}
+				onClose={() => setIsModalOpen(false)}
 			/>
 		</div>
 	)

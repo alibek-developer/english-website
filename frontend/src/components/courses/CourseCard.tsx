@@ -1,144 +1,113 @@
-import { Button } from '@/components/ui/button'
-import { useLanguage } from '@/hooks/useLanguage'
-import type { Course } from '@/types/course'
-import { motion } from 'framer-motion'
-import { ArrowRight, Calendar, CalendarDays, Clock, MapPin } from 'lucide-react'
-import { useState } from 'react'
-import { CourseModal } from './CourseModal'
-import { ScheduleModal } from './ScheduleModal'
+'use client'
 
-interface CourseCardProps {
+import { Course } from '@/types/course'
+import { CalendarDays, Clock, MapPin } from 'lucide-react'
+import Image from 'next/image'
+
+type Props = {
 	course: Course
-	index: number
+	onOpenCourse: (course: Course) => void
+	onOpenSchedule: (course: Course) => void
 }
 
-export function CourseCard({ course, index }: CourseCardProps) {
-	const [isModalOpen, setIsModalOpen] = useState(false)
-	const [isScheduleOpen, setIsScheduleOpen] = useState(false)
-	const { language } = useLanguage()
-
-	const formatPrice = (price: number) => {
-		return new Intl.NumberFormat('uz-UZ').format(price) + " so'm"
-	}
-
-	const title = language === 'uz' ? course.titleUz : course.title
-	const description =
-		language === 'uz' ? course.descriptionUz : course.description
-	const features = language === 'uz' ? course.featuresUz : course.features
-
-	const getSchedule = (category: string) => {
-		const schedules: Record<string, Array<{ day: string; time: string }>> = {
-			IELTS: [
-				{ day: 'Dushanba', time: '19:00 - 21:00' },
-				{ day: 'Chorshanba', time: '19:00 - 21:00' },
-				{ day: 'Juma', time: '19:00 - 21:00' },
-			],
-			'General English': [
-				{ day: 'Seshanba', time: '18:00 - 20:00' },
-				{ day: 'Payshanba', time: '18:00 - 20:00' },
-			],
-			'Speaking Club': [{ day: 'Shanba', time: '16:00 - 18:00' }],
-			'Business English': [
-				{ day: 'Dushanba', time: '20:00 - 22:00' },
-				{ day: 'Juma', time: '20:00 - 22:00' },
-			],
-			'Kids English': [
-				{ day: 'Seshanba', time: '16:00 - 17:30' },
-				{ day: 'Payshanba', time: '16:00 - 17:30' },
-				{ day: 'Shanba', time: '14:00 - 15:30' },
-			],
-		}
-		return schedules[category] || []
-	}
-
+export default function CourseCard({
+	course,
+	onOpenCourse,
+	onOpenSchedule,
+}: Props) {
 	return (
-		<>
-			<motion.div
-				initial={{ opacity: 0, y: 20 }}
-				whileInView={{ opacity: 1, y: 0 }}
-				viewport={{ once: true }}
-				transition={{ duration: 0.5, delay: index * 0.1 }}
-				whileHover={{ y: -8 }}
-				className='bg-white dark:bg-slate-900 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all border border-slate-200 dark:border-slate-800'
-			>
-				<div className='aspect-[16/10] bg-gradient-to-br from-sky-100 to-blue-100 overflow-hidden'>
-					<img
+		<article className='bg-[#071022] rounded-2xl overflow-hidden border border-white/5 shadow-[0_10px_30px_rgba(2,6,23,0.6)]'>
+			{/* Top image / hero */}
+			<div className='w-full h-44 bg-[#dff0f9] relative'>
+				{course.image ? (
+					<Image
 						src={course.image}
-						alt={title}
-						className='w-full h-full object-cover'
-						onError={e => {
-							e.currentTarget.src = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='250'%3E%3Crect fill='%23E0F2FE' width='400' height='250'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%230F172A' font-size='18' font-family='Arial'%3E${course.category}%3C/text%3E%3C/svg%3E`
-						}}
+						alt={course.title}
+						fill
+						className='object-cover'
+						sizes='(max-width:768px) 100vw, 33vw'
 					/>
-				</div>
+				) : (
+					<div className='w-full h-full flex items-center justify-center text-[#0C1222] font-semibold'>
+						{course.category ?? ''}
+					</div>
+				)}
+			</div>
 
-				<div className='p-6'>
-					<div className='inline-block px-3 py-1 bg-sky-50 dark:bg-sky-950 text-sky-700 dark:text-sky-400 text-xs font-medium rounded-full mb-3'>
+			{/* Body */}
+			<div className='p-6 text-white space-y-4'>
+				{/* Category pill */}
+				{course.category && (
+					<div className='inline-block px-3 py-1 bg-[#0D4C73] rounded-full text-xs font-medium text-white/95'>
 						{course.category}
 					</div>
+				)}
 
-					<h3 className='text-xl font-bold text-slate-900 dark:text-white mb-2'>
-						{title}
-					</h3>
-					<p className='text-slate-600 dark:text-slate-400 text-sm mb-4 line-clamp-2'>
-						{description}
+				{/* Title */}
+				<h3 className='mt-2 text-2xl lg:text-3xl font-extrabold leading-snug'>
+					{course.title}
+				</h3>
+
+				{/* Desc */}
+				{course.description && (
+					<p className='text-white/70 text-sm leading-relaxed'>
+						{course.description}
 					</p>
+				)}
 
-					<div className='space-y-2 mb-4'>
-						<div className='flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400'>
-							<Clock className='w-4 h-4 text-sky-600 dark:text-sky-400' />
-							<span>{course.duration}</span>
+				{/* Meta row */}
+				<div className='mt-2 space-y-2 text-sm text-white/70'>
+					<div className='flex items-center gap-3'>
+						<div className='flex items-center gap-2'>
+							<Clock size={16} className='text-[#6fb7e6]' />{' '}
+							<span>{course.duration ?? '—'}</span>
 						</div>
-						<div className='flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400'>
-							<MapPin className='w-4 h-4 text-sky-600 dark:text-sky-400' />
-							<span className='capitalize'>{course.format}</span>
-						</div>
-						<div className='flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400'>
-							<Calendar className='w-4 h-4 text-sky-600 dark:text-sky-400' />
-							<span>
-								Start: {new Date(course.startDate).toLocaleDateString('uz-UZ')}
-							</span>
-						</div>
-					</div>
 
-					<Button
-						variant='outline'
-						size='sm'
-						onClick={() => setIsScheduleOpen(true)}
-						className='w-full mb-4 gap-2'
-					>
-						<CalendarDays className='w-4 h-4' />
-						Dars jadvali
-					</Button>
+						<div className='flex items-center gap-2'>
+							<MapPin size={16} className='text-[#6fb7e6]' />{' '}
+							<span>{course.format ?? "Format ko'rsatilmagan"}</span>
+						</div>
 
-					<div className='flex items-center justify-between pt-4 border-t border-slate-100 dark:border-slate-800'>
-						<div>
-							<div className='text-2xl font-bold text-slate-900 dark:text-white'>
-								{formatPrice(course.price)}
+						{course.startDate && (
+							<div className='flex items-center gap-2'>
+								<CalendarDays size={16} className='text-[#6fb7e6]' />{' '}
+								<span>Boshlanishi: {course.startDate}</span>
 							</div>
-							<div className='text-xs text-slate-500 dark:text-slate-400'>
-								per course
-							</div>
-						</div>
-						<Button onClick={() => setIsModalOpen(true)} className='gap-2'>
-							Xarid qilish
-							<ArrowRight className='w-4 h-4' />
-						</Button>
+						)}
 					</div>
 				</div>
-			</motion.div>
 
-			<CourseModal
-				course={course}
-				isOpen={isModalOpen}
-				onClose={() => setIsModalOpen(false)}
-			/>
-			<ScheduleModal
-				isOpen={isScheduleOpen}
-				onClose={() => setIsScheduleOpen(false)}
-				courseTitle={title}
-				schedule={getSchedule(course.category)}
-			/>
-		</>
+				{/* Actions: schedule button (full width) */}
+				<div className='mt-3'>
+					<button
+						onClick={() => onOpenSchedule(course)}
+						className='w-full flex items-center justify-center gap-3 border border-white/10 rounded-xl py-3 text-sm text-white/90 hover:bg-white/5 transition'
+						aria-label={`Dars jadvali — ${course.title}`}
+					>
+						<CalendarDays size={18} /> Dars jadvali
+					</button>
+				</div>
+
+				{/* Price + Buy */}
+				<div className='mt-4 flex items-center justify-between gap-4'>
+					<div>
+						<div className='text-2xl lg:text-3xl font-extrabold text-white'>
+							{course.price ? `${course.price} so'm` : "Narx yo'q"}
+						</div>
+						<div className='text-xs text-white/60'>kurs uchun</div>
+					</div>
+
+					<div className='shrink-0'>
+						<button
+							onClick={() => onOpenCourse(course)}
+							className='bg-white text-[#0C1222] px-5 py-2 rounded-lg font-semibold hover:scale-[1.02] transition shadow-sm'
+							aria-label={`Xarid qilish — ${course.title}`}
+						>
+							Xarid qilish →
+						</button>
+					</div>
+				</div>
+			</div>
+		</article>
 	)
 }

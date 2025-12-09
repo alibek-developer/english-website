@@ -1,23 +1,16 @@
+// types/course.ts
 export interface Course {
 	id: number
-
 	title: string
-	titleUz: string
-
+	titleUz?: string
 	description: string
-	descriptionUz: string
-
+	descriptionUz?: string
+	image?: string
+	category?: string
+	duration?: string
+	level?: string
+	format?: string
+	startDate?: string
 	price: number
-	duration: string
-
-	format: 'online' | 'offline' | 'hybrid'
-
-	level: string
-	startDate: string
-
-	image: string
-	category: string
-
-	features?: string[]
-	featuresUz?: string[]
+	schedule?: { day: string; time: string }[]
 }
