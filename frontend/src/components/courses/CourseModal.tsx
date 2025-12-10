@@ -1,84 +1,173 @@
 'use client'
 
-import { Course } from '@/types/course'
-import React from 'react'
+import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 
-type ModalProps = {
+import { Button } from '@/components/ui/button'
+import {
+	Dialog,
+	DialogContent,
+	DialogDescription,
+	DialogHeader,
+	DialogTitle,
+} from '@/components/ui/dialog'
+import { useToast } from '@/components/ui/use-toast'
+import { useLanguage } from '@/hooks/useLanguage'
+import { Course } from '@/types/course'
+import { Check, CreditCard, Smartphone } from 'lucide-react'
+
+interface CourseModalProps {
 	course: Course | null
 	isOpen: boolean
 	onClose: () => void
 }
 
-export const CourseModal: React.FC<ModalProps> = ({
-	course,
-	isOpen,
-	onClose,
-}) => {
-	if (!isOpen || !course) return null
+export function CourseModal({ course, isOpen, onClose }: CourseModalProps) {
+	if (!course) return null
+
+	const { language } = useLanguage()
+	const router = useRouter() // ✅ useNavigate emas
+	const { toast } = useToast()
+
+	const [selectedPayment, setSelectedPayment] = useState<string | null>(null)
+
+	const title =
+		language === 'uz' ? course.titleUz ?? course.title : course.title
+	const description =
+		language === 'uz'
+			? course.descriptionUz ?? course.description
+			: course.description
+
+	const rawFeatures =
+		language === 'uz' ? course.featuresUz ?? course.features : course.features
+
+	const features = Array.isArray(rawFeatures) ? rawFeatures : []
+
+	const formatPrice = (price: number) =>
+		new Intl.NumberFormat('uz-UZ').format(price) + " so'm"
+
+	const paymentMethods = [
+		{ name: 'Click', icon: Smartphone },
+		{ name: 'Payme', icon: Smartphone },
+		{ name: 'Uzcard', icon: CreditCard },
+		{ name: 'Payze', icon: CreditCard },
+	]
+
+	const handlePayment = (method: string) => {
+		setSelectedPayment(method)
+
+		const courseTitle = title
+
+		// ✅ NEXT.JS Router
+		router.push(`/payment-success?course=${encodeURIComponent(courseTitle)}`)
+
+		onClose()
+
+		toast({
+			title: 'To‘lovga yo‘naltirilmoqda',
+			description: `${method} orqali to‘lov sahifasiga yo‘naltirildingiz`,
+		})
+	}
 
 	return (
-		<div className='fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center p-4 z-50'>
-			<div className='bg-white rounded p-6 w-full max-w-lg relative'>
-				<button className='absolute top-2 right-2' onClick={onClose}>
-					✖
-				</button>
+		<Dialog open={isOpen} onOpenChange={onClose}>
+			<DialogContent className='max-w-2xl max-h-[90vh] overflow-y-auto'>
+				<DialogHeader>
+					<DialogTitle className='text-2xl'>{title}</DialogTitle>
+					<DialogDescription>{description}</DialogDescription>
+				</DialogHeader>
 
-				{course.image && (
-					<img
-						src={course.image}
-						alt={course.title}
-						className='w-full h-48 object-cover rounded mb-4'
-					/>
-				)}
-
-				<h2 className='text-2xl font-semibold mb-2'>{course.title}</h2>
-				<p className='text-gray-700 mb-2'>{course.description}</p>
-
-				{course.category && (
-					<p>
-						<strong>Kategoriya:</strong> {course.category}
-					</p>
-				)}
-
-				{course.duration && (
-					<p>
-						<strong>Davomiyligi:</strong> {course.duration}
-					</p>
-				)}
-
-				{course.level && (
-					<p>
-						<strong>Daraja:</strong> {course.level}
-					</p>
-				)}
-
-				{course.format && (
-					<p>
-						<strong>Format:</strong> {course.format}
-					</p>
-				)}
-
-				{course.startDate && (
-					<p>
-						<strong>Boshlanish sanasi:</strong> {course.startDate}
-					</p>
-				)}
-
-				<p className='font-semibold mt-3'>Narxi: {course.price} so’m</p>
-
-				{course.schedule && (
-					<div className='mt-3'>
-						<h3 className='font-semibold mb-1'>Dars jadvali:</h3>
-						<ul className='list-disc ml-5'>
-							{course.schedule.map((s, index) => (
-								<li key={index}>
-									{s.day}: {s.time}
+				<div className='space-y-6'>
+					{/* Image */}
+					<div className='aspect-video bg-gradient-to-br from-sky-100 to-blue-100 rounded-xl overflow-hidden'>
+						<img
+							src={course.image}
+							alt={title}
+							className='w-full h-full object-cover'
+							onError={e => {
+								e.currentTarget.src = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='340'%3E%3Crect fill='%23E0F2FE' width='600' height='340'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%230F172A' font-size='24' font-family='Arial'%3E${course.category}%3C/text%3E%3C/svg%3E`
+							}}
+						/>
+					</div>
+					{/* Details */}
+					<div>
+						<h3 className='font-semibold text-lg mb-3'>Kurs tafsilotlari:</h3>
+						<div className='grid grid-cols-2 gap-4 text-sm'>
+							<div>
+								<span className='text-slate-600'>Davomiyligi:</span>
+								<div className='font-medium'>{course.duration}</div>
+							</div>
+							<div>
+								<span className='text-slate-600'>Format:</span>
+								<div className='font-medium capitalize'>{course.format}</div>
+							</div>
+							<div>
+								<span className='text-slate-600'>Daraja:</span>
+								<div className='font-medium'>{course.level}</div>
+							</div>
+							<div>
+								<span className='text-slate-600'>Boshlanishi:</span>
+								<div className='font-medium'>
+									{new Date(course.startDate).toLocaleDateString('uz-UZ')}
+								</div>
+							</div>
+						</div>
+					</div>
+					{/* Features */}
+					<div>
+						<h3 className='font-semibold text-lg mb-3'>Kursga kiradi:</h3>
+						<ul className='space-y-2'>
+							{features.map((feature: string, index: number) => (
+								<li key={index} className='flex items-start gap-2'>
+									<Check className='w-5 h-5 text-sky-600 flex-shrink-0 mt-0.5' />
+									<span className='text-sm text-slate-700'>{feature}</span>
 								</li>
 							))}
 						</ul>
 					</div>
-				)}
-			</div>
-		</div>
+					{/* Payment */}
+					<div className='border-t pt-6'>
+						<div className='flex items-center justify-between mb-6'>
+							<div>
+								<div className='text-sm text-slate-600'>Jami narx:</div>
+								<div className='text-3xl font-bold text-slate-900'>
+									{formatPrice(course.price)}
+								</div>
+							</div>
+						</div>
+
+						<div className='mb-6'>
+							<h3 className='font-semibold text-sm mb-3'>
+								To‘lov usulini tanlang:
+							</h3>
+							<div className='grid grid-cols-2 gap-3'>
+								{paymentMethods.map(method => (
+									<Button
+										key={method.name}
+										variant={
+											selectedPayment === method.name ? 'default' : 'outline'
+										}
+										className='h-auto py-4 gap-2'
+										onClick={() => handlePayment(method.name)}
+									>
+										<method.icon className='w-5 h-5' />
+										{method.name}
+									</Button>
+								))}
+							</div>
+						</div>
+
+						<Button
+							className='w-full'
+							size='lg'
+							onClick={onClose}
+							variant='outline'
+						>
+							Yopish
+						</Button>
+					</div>
+				</div>
+			</DialogContent>
+		</Dialog>
 	)
 }

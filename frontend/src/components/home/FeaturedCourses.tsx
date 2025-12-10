@@ -1,5 +1,5 @@
 import { backend } from '@/client'
-import { CourseCard } from '@/components/courses/CourseCard'
+// import { CourseCard } from '@/components/courses/CourseCard'
 import { Button } from '@/components/ui/button'
 import { useQuery } from '@tanstack/react-query'
 import { motion } from 'framer-motion'
@@ -33,11 +33,11 @@ export function FeaturedCourses() {
 					</p>
 				</motion.div>
 
-				<div className='grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12'>
+				{/* <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12'>
 					{featuredCourses?.map((course: any, index: number) => (
 						<CourseCard key={course.id} course={course} index={index} />
 					))}
-				</div>
+				</div> */}
 
 				<motion.div
 					initial={{ opacity: 0, y: 20 }}

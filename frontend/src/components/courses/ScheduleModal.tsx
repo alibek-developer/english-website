@@ -1,29 +1,24 @@
-'use client'
-
 import {
 	Dialog,
 	DialogContent,
 	DialogHeader,
 	DialogTitle,
 } from '@/components/ui/dialog'
-import { Course } from '@/types/course'
 import { Calendar, Clock } from 'lucide-react'
 
 interface ScheduleModalProps {
 	isOpen: boolean
 	onClose: () => void
-	course: Pick<Course, 'title' | 'schedule'> | null
+	courseTitle: string
+	schedule: Array<{ day: string; time: string }>
 }
 
-export const ScheduleModal = ({
+export function ScheduleModal({
 	isOpen,
 	onClose,
-	course,
-}: ScheduleModalProps) => {
-	if (!course) return null
-
-	const schedule = course.schedule || []
-
+	courseTitle,
+	schedule,
+}: ScheduleModalProps) {
 	return (
 		<Dialog open={isOpen} onOpenChange={onClose}>
 			<DialogContent className='sm:max-w-md bg-white dark:bg-slate-900'>
@@ -31,9 +26,8 @@ export const ScheduleModal = ({
 					<DialogTitle className='text-2xl font-bold text-slate-900 dark:text-white'>
 						Dars jadvali
 					</DialogTitle>
-
 					<p className='text-sm text-slate-600 dark:text-slate-400'>
-						{course.title}
+						{courseTitle}
 					</p>
 				</DialogHeader>
 
@@ -49,7 +43,6 @@ export const ScheduleModal = ({
 									{item.day}
 								</span>
 							</div>
-
 							<div className='flex items-center gap-2 text-slate-700 dark:text-slate-300'>
 								<Clock className='w-4 h-4 text-sky-600 dark:text-sky-400' />
 								<span className='font-semibold'>{item.time}</span>
