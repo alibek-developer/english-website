@@ -1,16 +1,16 @@
-import { api, APIError } from "encore.dev/api";
-import { db } from "../db";
-import type { Course } from "./list";
+import { api, APIError } from 'encore.dev/api'
+import { db } from '../db'
+import type { Course } from './list'
 
 export interface GetCourseParams {
-  id: number;
+	id: number
 }
 
 // Retrieves a specific course by ID
 export const get = api<GetCourseParams, { course: Course }>(
-  { expose: true, method: "GET", path: "/courses/:id" },
-  async ({ id }): Promise<{ course: Course }> => {
-    const course = await db.queryRow<Course>`
+	{ expose: true, method: 'GET', path: '/courses/:id' },
+	async ({ id }): Promise<{ course: Course }> => {
+		const course = await db.queryRow<Course>`
       SELECT 
         id,
         title,
@@ -26,12 +26,12 @@ export const get = api<GetCourseParams, { course: Course }>(
         category
       FROM courses
       WHERE id = ${id}
-    `;
-    
-    if (!course) {
-      throw APIError.notFound("course not found");
-    }
+    `
 
-    return { course };
-  }
-);
+		if (!course) {
+			throw APIError.notFound('course not found')
+		}
+
+		return { course }
+	}
+)
