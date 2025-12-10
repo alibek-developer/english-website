@@ -1,11 +1,9 @@
-'use client'
-
-import { backend } from '@/client'
-import { CourseCard } from '@/components/courses/CourseCard'
+import CourseCard from '@/components/courses/CourseCard'
+import { backend } from '@/lib'
 import { Course } from '@/types/course'
 import { useQuery } from '@tanstack/react-query'
-
-export function CoursesPage() {
+import { useState } from 'react'
+export default function CoursesPage() {
 	const { data, isLoading } = useQuery<{ courses: Course[] }>({
 		queryKey: ['courses'],
 		queryFn: async () => {
@@ -13,6 +11,10 @@ export function CoursesPage() {
 			return res.data
 		},
 	})
+
+	const [selectedCourse, setSelectedCourse] = useState<Course | null>(null)
+	const [isCourseModalOpen, setIsCourseModalOpen] = useState(false)
+	const [isScheduleModalOpen, setIsScheduleModalOpen] = useState(false)
 
 	if (isLoading) {
 		return (
@@ -29,7 +31,19 @@ export function CoursesPage() {
 
 				<div className='grid md:grid-cols-2 lg:grid-cols-3 gap-8'>
 					{data?.courses?.map((course, index) => (
-						<CourseCard key={course.id} course={course} index={index} />
+						<CourseCard
+							key={course.id}
+							course={course}
+							// index={index}
+							onOpenCourse={() => {
+								setSelectedCourse(course)
+								setIsCourseModalOpen(true)
+							}}
+							onOpenSchedule={() => {
+								setSelectedCourse(course)
+								setIsScheduleModalOpen(true)
+							}}
+						/>
 					))}
 				</div>
 			</div>

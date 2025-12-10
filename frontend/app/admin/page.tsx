@@ -1,9 +1,10 @@
+'use client'
+
 import { motion } from 'framer-motion'
 
 export default function AdminLogin() {
 	return (
 		<div className='min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500'>
-			{/* Background animated gradient blob */}
 			<div className='absolute inset-0'>
 				<div className='absolute w-[500px] h-[500px] bg-white/20 blur-3xl rounded-full animate-pulse-slow -top-20 -left-20'></div>
 				<div className='absolute w-[500px] h-[500px] bg-white/10 blur-3xl rounded-full animate-pulse-slower bottom-0 right-0'></div>
@@ -25,7 +26,7 @@ export default function AdminLogin() {
 						<input
 							type='email'
 							className='mt-2 w-full px-4 py-3 rounded-xl bg-white/20 text-white placeholder-white/60 outline-none 
-              focus:ring-2 focus:ring-white/80 transition shadow-inner'
+							focus:ring-2 focus:ring-white/80 transition shadow-inner'
 							placeholder='admin@gmail.com'
 						/>
 					</div>
@@ -35,7 +36,7 @@ export default function AdminLogin() {
 						<input
 							type='password'
 							className='mt-2 w-full px-4 py-3 rounded-xl bg-white/20 text-white placeholder-white/60 outline-none 
-              focus:ring-2 focus:ring-white/80 transition shadow-inner'
+							focus:ring-2 focus:ring-white/80 transition shadow-inner'
 							placeholder='********'
 						/>
 					</div>
@@ -44,7 +45,7 @@ export default function AdminLogin() {
 						whileHover={{ scale: 1.03 }}
 						whileTap={{ scale: 0.97 }}
 						className='w-full py-3 mt-4 text-lg font-semibold rounded-xl bg-white/90 text-purple-700 shadow-xl
-            hover:bg-white transition relative overflow-hidden'
+						hover:bg-white transition relative overflow-hidden'
 					>
 						<span>Login</span>
 					</motion.button>

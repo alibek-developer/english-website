@@ -17,6 +17,13 @@ const demoCourses: Course[] = [
 		format: 'Offline',
 		startDate: '2025-01-15',
 		price: 500000,
+
+		features: [
+			'Amaliy loyihalar',
+			'Zoom yozuvlari',
+			'Uyga vazifalar va mentorlik',
+		],
+
 		schedule: [
 			{ day: 'Dushanba', time: '19:00 dan 21:00 gacha' },
 			{ day: 'Chorshanba', time: '19:00 dan 21:00 gacha' },

@@ -89,6 +89,7 @@ export default function CourseCard({
 				</div>
 
 				{/* Price + Buy */}
+				{/* Price + Buy */}
 				<div className='mt-4 flex items-center justify-between gap-4'>
 					<div>
 						<div className='text-2xl lg:text-3xl font-extrabold text-white'>
@@ -100,10 +101,10 @@ export default function CourseCard({
 					<div className='shrink-0'>
 						<button
 							onClick={() => onOpenCourse(course)}
-							className='bg-white text-[#0C1222] px-5 py-2 rounded-lg font-semibold hover:scale-[1.02] transition shadow-sm'
-							aria-label={`Xarid qilish — ${course.title}`}
+							className='bg-white text-[#0C1222] px-5 py-2 rounded-lg font-semibold hover:scale-[1.02] transition'
+							aria-label={`Xarid qilish – ${course.title}`}
 						>
-							Xarid qilish →
+							Xarid qilish
 						</button>
 					</div>
 				</div>
