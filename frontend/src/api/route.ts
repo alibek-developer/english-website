@@ -1,32 +1,40 @@
-// app/api/resources/route.ts
-import type { Resource } from '@/types/contact'
+// app/api/contact/route.ts
 import { NextResponse } from 'next/server'
 
-const SAMPLE: Resource[] = [
+// ContactResource tipini import qilish (agar yo‘q bo‘lsa, quyida yaratamiz)
+import type { Contact } from '@/types/contact'
+
+const CONTACT_DATA: Contact[] = [
 	{
-		id: 'r1',
-		title: 'IELTS Listening Tips',
-		description: 'Short guide and practice tasks for IELTS Listening.',
-		type: 'pdf',
-		link: '/assets/resources/ielts-listening.pdf',
-		thumbnail: '/assets/images/res-1.jpg',
-		tags: ['IELTS', 'Listening'],
-		createdAt: new Date().toISOString(),
+		id: 1,
+		title: 'Telegram',
+		description: 'Tezkor javob beraman, 24/7 yordam',
+		link: 'https://t.me/alibek_allaberganov',
+		icon: 'telegram',
 	},
 	{
-		id: 'r2',
-		title: 'Academic Writing - Task 2',
-		description: 'Video lesson on how to structure essay in Task 2.',
-		type: 'video',
-		link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-		thumbnail: '/assets/images/res-2.jpg',
-		tags: ['Writing', 'Academic'],
-		createdAt: new Date().toISOString(),
+		id: 2,
+		title: 'Instagram',
+		description: 'Talabalar natijalari, darslar va yangiliklar',
+		link: 'https://instagram.com/alibek_ielts',
+		icon: 'instagram',
 	},
-	// ...more sample items
+	{
+		id: 3,
+		title: 'Telefon',
+		description: '+998 99 123 45 67 (qo‘ng‘iroq yoki WhatsApp)',
+		link: 'tel:+998991234567',
+		icon: 'phone',
+	},
+	{
+		id: 4,
+		title: 'Email',
+		description: 'Rasmiy xatlar va hamkorlik uchun',
+		link: 'mailto:alibek@english.uz',
+		icon: 'mail',
+	},
 ]
 
 export async function GET() {
-	// replace with DB call if you have one
-	return NextResponse.json(SAMPLE)
+	return NextResponse.json(CONTACT_DATA)
 }

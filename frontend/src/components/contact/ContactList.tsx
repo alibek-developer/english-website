@@ -2,6 +2,7 @@
 'use client'
 
 import { Contact } from '@/types/contact'
+import { useEffect, useState } from 'react'
 import ContactCard from './ContactCard'
 
 interface ContactListProps {
@@ -9,6 +10,25 @@ interface ContactListProps {
 }
 
 export default function ContactList({ initialResources }: ContactListProps) {
+	const [contacts, setContacts] = useState<Contact[]>([])
+	const [loading, setLoading] = useState(true)
+	const [error, setError] = useState(false)
+
+	useEffect(() => {
+		fetch('/api/contact')
+			.then(res => {
+				if (!res.ok) throw new Error('Failed to fetch')
+				return res.json()
+			})
+			.then(data => {
+				setContacts(data)
+				setLoading(false)
+			})
+			.catch(() => {
+				setError(true)
+				setLoading(false)
+			})
+	}, [])
 	return (
 		<section className='py-12'>
 			<div className='max-w-7xl mx-auto'>
