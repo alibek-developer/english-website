@@ -1,3 +1,4 @@
+'use client'
 import { backend } from '@/client'
 
 export function useBackend() {

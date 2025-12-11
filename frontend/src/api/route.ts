@@ -1,5 +1,5 @@
 // app/api/resources/route.ts
-import type { Resource } from '@/types/resource'
+import type { Resource } from '@/types/contact'
 import { NextResponse } from 'next/server'
 
 const SAMPLE: Resource[] = [

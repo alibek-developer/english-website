@@ -18,38 +18,42 @@ export function CTASection() {
 
 					<div className='relative z-10'>
 						<h2 className='text-3xl md:text-4xl lg:text-5xl font-bold mb-6'>
-							Ingliz tilini o'rganishni bugun boshlang!
+							Ingliz tilini o'rganish bugungi kunda!
 						</h2>
-						<p className='text-lg md:text-xl mb-8 max-w-2xl mx-auto opacity-90'>
+						<p className='text-lg md:text-xl mb-12 max-w-2xl mx-auto opacity-90'>
 							Bepul konsultatsiya uchun hoziroq bog'laning va o'zingizga mos
 							kursni toping
 						</p>
 
-						<div className='flex flex-col sm:flex-row gap-4 justify-center'>
-							<Link href='/contact'>
-								<Button
-									size='lg'
-									variant='secondary'
-									className='gap-2 text-base px-8 py-6'
-								>
+						<div className='flex flex-col sm:flex-row gap-6 justify-center items-center'>
+							{/* Birinchi button - qora fonli, oq matnli */}
+							<Button
+								size='lg'
+								className='gap-3 text-base px-10 py-6 bg-gray-900 text-white hover:bg-gray-800 rounded-full font-medium shadow-lg'
+								asChild
+							>
+								<Link href='/contact'>
 									Bepul Konsultatsiya
 									<ArrowRight className='w-5 h-5' />
-								</Button>
-							</Link>
-							<a
-								href='https://wa.me/998901234567'
-								target='_blank'
-								rel='noopener noreferrer'
+								</Link>
+							</Button>
+
+							{/* Ikkinchi button - shaffof outline, Telegram */}
+							<Button
+								size='lg'
+								variant='outline'
+								className='gap-3 text-base px-10 py-6 bg-transparent border-2 border-white/50 text-white hover:bg-white/10 rounded-full font-medium backdrop-blur-sm'
+								asChild
 							>
-								<Button
-									size='lg'
-									variant='outline'
-									className='gap-2 text-base px-8 py-6 bg-white/10 border-white/20 text-white hover:bg-white/20'
+								<a
+									href='https://t.me/your_telegram_username' // O'zingizning Telegram linkingizni qo'ying
+									target='_blank'
+									rel='noopener noreferrer'
 								>
 									<MessageCircle className='w-5 h-5' />
-									WhatsApp
-								</Button>
-							</a>
+									Telegram
+								</a>
+							</Button>
 						</div>
 					</div>
 				</motion.div>

@@ -16,97 +16,89 @@ export default function CourseCard({
 	onOpenSchedule,
 }: Props) {
 	return (
-		<article className='bg-[#071022] rounded-2xl overflow-hidden border border-white/5 shadow-[0_10px_30px_rgba(2,6,23,0.6)]'>
-			{/* Top image / hero */}
-			<div className='w-full h-44 bg-[#dff0f9] relative'>
+		<article className='w-full max-w-sm mx-auto overflow-hidden rounded-3xl bg-[#0b1327] shadow-2xl'>
+			{/* Hero Image */}
+			<div className='relative h-52 bg-[#e6f3f9]'>
 				{course.image ? (
 					<Image
 						src={course.image}
 						alt={course.title}
 						fill
 						className='object-cover'
-						sizes='(max-width:768px) 100vw, 33vw'
+						sizes='(max-width: 768px) 100vw, 380px'
 					/>
 				) : (
-					<div className='w-full h-full flex items-center justify-center text-[#0C1222] font-semibold'>
-						{course.category ?? ''}
+					<div className='flex h-full items-center justify-center'>
+						<span className='text-4xl font-bold text-[#0b1327]/10'>
+							{course.category}
+						</span>
 					</div>
 				)}
 			</div>
 
 			{/* Body */}
-			<div className='p-6 text-white space-y-4'>
-				{/* Category pill */}
-				{course.category && (
-					<div className='inline-block px-3 py-1 bg-[#0D4C73] rounded-full text-xs font-medium text-white/95'>
-						{course.category}
-					</div>
-				)}
+			<div className='p-5 text-white'>
+				{/* Category Pill */}
+				<div className='mb-3 inline-block rounded-full bg-[#0ea5e9] px-3.5 py-1.5 text-xs font-bold'>
+					{course.category || 'Frontend'}
+				</div>
 
 				{/* Title */}
-				<h3 className='mt-2 text-2xl lg:text-3xl font-extrabold leading-snug'>
-					{course.title}
-				</h3>
+				<h3 className='text-2xl font-black leading-tight'>{course.title}</h3>
 
-				{/* Desc */}
+				{/* Description */}
 				{course.description && (
-					<p className='text-white/70 text-sm leading-relaxed'>
+					<p className='mt-2 text-sm leading-relaxed text-white/70'>
 						{course.description}
 					</p>
 				)}
 
-				{/* Meta row */}
-				<div className='mt-2 space-y-2 text-sm text-white/70'>
-					<div className='flex items-center gap-3'>
-						<div className='flex items-center gap-2'>
-							<Clock size={16} className='text-[#6fb7e6]' />{' '}
-							<span>{course.duration ?? '—'}</span>
+				{/* Meta Info */}
+				<div className='mt-4 space-y-2.5 text-sm text-white/80'>
+					{course.duration && (
+						<div className='flex items-center gap-3'>
+							<Clock size={18} className='text-[#0ea5e9]' />
+							<span>{course.duration}</span>
 						</div>
-
-						<div className='flex items-center gap-2'>
-							<MapPin size={16} className='text-[#6fb7e6]' />{' '}
-							<span>{course.format ?? "Format ko'rsatilmagan"}</span>
+					)}
+					{course.format && (
+						<div className='flex items-center gap-3'>
+							<MapPin size={18} className='text-[#0ea5e9]' />
+							<span>{course.format}</span>
 						</div>
-
-						{course.startDate && (
-							<div className='flex items-center gap-2'>
-								<CalendarDays size={16} className='text-[#6fb7e6]' />{' '}
-								<span>Boshlanishi: {course.startDate}</span>
-							</div>
-						)}
-					</div>
+					)}
+					{course.startDate && (
+						<div className='flex items-center gap-3'>
+							<CalendarDays size={18} className='text-[#0ea5e9]' />
+							<span>Boshlanish vaqti: {course.startDate}</span>
+						</div>
+					)}
 				</div>
 
-				{/* Actions: schedule button (full width) */}
-				<div className='mt-3'>
-					<button
-						onClick={() => onOpenSchedule(course)}
-						className='w-full flex items-center justify-center gap-3 border border-white/10 rounded-xl py-3 text-sm text-white/90 hover:bg-white/5 transition'
-						aria-label={`Dars jadvali — ${course.title}`}
-					>
-						<CalendarDays size={18} /> Dars jadvali
-					</button>
-				</div>
+				{/* Schedule Button */}
+				<button
+					onClick={() => onOpenSchedule(course)}
+					className='mt-5 flex w-full items-center justify-center gap-3 rounded-2xl bg-white/5 py-3.5 text-sm font-medium text-white/90 transition hover:bg-white/10'
+				>
+					<CalendarDays size={19} />
+					Dars jadvali
+				</button>
 
 				{/* Price + Buy */}
-				{/* Price + Buy */}
-				<div className='mt-4 flex items-center justify-between gap-4'>
+				<div className='mt-5 flex items-end justify-between'>
 					<div>
-						<div className='text-2xl lg:text-3xl font-extrabold text-white'>
-							{course.price ? `${course.price} so'm` : "Narx yo'q"}
+						<div className='text-4xl font-black leading-none text-white'>
+							{course.price ? course.price.toLocaleString('ru-RU') : '500 000'}
 						</div>
-						<div className='text-xs text-white/60'>kurs uchun</div>
+						<div className='text-[13px] text-white/50'>so'm kurs uchun</div>
 					</div>
 
-					<div className='shrink-0'>
-						<button
-							onClick={() => onOpenCourse(course)}
-							className='bg-white text-[#0C1222] px-5 py-2 rounded-lg font-semibold hover:scale-[1.02] transition'
-							aria-label={`Xarid qilish – ${course.title}`}
-						>
-							Xarid qilish
-						</button>
-					</div>
+					<button
+						onClick={() => onOpenCourse(course)}
+						className='flex h-12 items-center justify-center rounded-2xl bg-white px-6 font-bold text-[#0b1327] shadow-lg transition hover:shadow-xl active:scale-95'
+					>
+						Xarid qilish →
+					</button>
 				</div>
 			</div>
 		</article>

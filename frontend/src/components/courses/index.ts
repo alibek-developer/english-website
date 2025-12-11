@@ -1,3 +1,3 @@
 export { default as CourseCard } from './CourseCard'
-export { CourseModal } from './CourseModal'
+export { default as CourseModal } from './CourseModal'
 export { ScheduleModal } from './ScheduleModal'

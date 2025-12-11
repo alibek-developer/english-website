@@ -1,17 +1,30 @@
-import {
-	Dialog,
-	DialogContent,
-	DialogHeader,
-	DialogTitle,
-} from '@/components/ui/dialog'
-import { Calendar, Clock } from 'lucide-react'
+// components/courses/ScheduleModal.tsx   ← bu fayl alohida bo‘lsin!
+
+'use client'
+
+import { Calendar, Clock, X } from 'lucide-react'
+
+interface ScheduleItem {
+	day: string
+	time: string
+}
 
 interface ScheduleModalProps {
 	isOpen: boolean
 	onClose: () => void
 	courseTitle: string
-	schedule: Array<{ day: string; time: string }>
+	schedule: ScheduleItem[]
 }
+
+const dayOrder = [
+	'Dushanba',
+	'Seshanba',
+	'Chorshanba',
+	'Payshanba',
+	'Juma',
+	'Shanba',
+	'Yakshanba',
+]
 
 export function ScheduleModal({
 	isOpen,
@@ -19,44 +32,73 @@ export function ScheduleModal({
 	courseTitle,
 	schedule,
 }: ScheduleModalProps) {
+	if (!isOpen) return null
+
+	const sortedSchedule = [...schedule].sort((a, b) => {
+		return dayOrder.indexOf(a.day) - dayOrder.indexOf(b.day)
+	})
+
 	return (
-		<Dialog open={isOpen} onOpenChange={onClose}>
-			<DialogContent className='sm:max-w-md bg-white dark:bg-slate-900'>
-				<DialogHeader>
-					<DialogTitle className='text-2xl font-bold text-slate-900 dark:text-white'>
-						Dars jadvali
-					</DialogTitle>
-					<p className='text-sm text-slate-600 dark:text-slate-400'>
-						{courseTitle}
-					</p>
-				</DialogHeader>
+		<>
+			{/* Overlay */}
+			<div
+				className='fixed inset-0 z-50 bg-black/70 backdrop-blur-sm'
+				onClick={onClose}
+			/>
 
-				<div className='space-y-3 pt-4'>
-					{schedule.map((item, index) => (
-						<div
-							key={index}
-							className='flex items-center justify-between p-4 bg-sky-50 dark:bg-sky-950 rounded-lg border border-sky-100 dark:border-sky-900'
-						>
-							<div className='flex items-center gap-3'>
-								<Calendar className='w-5 h-5 text-sky-600 dark:text-sky-400' />
-								<span className='font-medium text-slate-900 dark:text-white'>
-									{item.day}
-								</span>
+			{/* Modal */}
+			<div className='fixed inset-0 z-50 flex items-center justify-center p-4'>
+				<div className='relative w-full max-w-md rounded-3xl bg-[#0f172a] text-white shadow-2xl'>
+					{/* Header */}
+					<div className='px-6 pt-6 pb-4'>
+						<div className='flex items-start justify-between'>
+							<div>
+								<h2 className='text-2xl font-bold'>Dars jadvali</h2>
+								<p className='mt-1 text-sm text-white/60'>{courseTitle}</p>
 							</div>
-							<div className='flex items-center gap-2 text-slate-700 dark:text-slate-300'>
-								<Clock className='w-4 h-4 text-sky-600 dark:text-sky-400' />
-								<span className='font-semibold'>{item.time}</span>
-							</div>
+							<button
+								onClick={onClose}
+								className='rounded-full p-2 transition hover:bg-white/10'
+							>
+								<X size={22} className='text-white/70' />
+							</button>
 						</div>
-					))}
-				</div>
+					</div>
 
-				<div className='mt-6 p-4 bg-blue-50 dark:bg-blue-950 rounded-lg border border-blue-100 dark:border-blue-900'>
-					<p className='text-sm text-blue-900 dark:text-blue-300'>
-						📌 Dars vaqti o'zgarishi mumkin. Aniq ma'lumot uchun bog'laning.
-					</p>
+					{/* Schedule Items */}
+					<div className='space-y-3 px-6 pb-6'>
+						{sortedSchedule.map(item => (
+							<div
+								key={item.day}
+								className='flex items-center justify-between rounded-2xl bg-white/5 px-5 py-4 transition hover:bg-white/10'
+							>
+								<div className='flex items-center gap-4'>
+									<div className='flex h-10 w-10 items-center justify-center rounded-lg bg-cyan-500/20'>
+										<Calendar size={20} className='text-cyan-400' />
+									</div>
+									<span className='font-semibold'>{item.day}</span>
+								</div>
+								<div className='flex items-center gap-2 text-cyan-300'>
+									<Clock size={18} />
+									<span className='text-sm font-medium'>{item.time}</span>
+								</div>
+							</div>
+						))}
+					</div>
+
+					{/* Banner */}
+					<div className='rounded-b-3xl bg-gradient-to-r from-purple-600/20 to-blue-600/20 px-6 py-5'>
+						<div className='flex items-start gap-3'>
+							<div className='mt-0.5 rounded-full bg-pink-500/20 p-2'>
+								<div className='h-5 w-5 rounded-full bg-pink-400' />
+							</div>
+							<p className='text-sm font-medium leading-relaxed'>
+								Dars vaqti o‘zingiz mumkin. Aniq ma’lumot uchun bog‘laning.
+							</p>
+						</div>
+					</div>
 				</div>
-			</DialogContent>
-		</Dialog>
+			</div>
+		</>
 	)
 }

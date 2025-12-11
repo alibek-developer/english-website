@@ -1,20 +1,10 @@
+// components/courses/CourseModal.tsx  ← To'liq almashtiring!
+
 'use client'
 
-import { useRouter } from 'next/navigation'
-import { useState } from 'react'
-
-import { Button } from '@/components/ui/button'
-import {
-	Dialog,
-	DialogContent,
-	DialogDescription,
-	DialogHeader,
-	DialogTitle,
-} from '@/components/ui/dialog'
-import { useToast } from '@/components/ui/use-toast'
-import { useLanguage } from '@/hooks/useLanguage'
 import { Course } from '@/types/course'
-import { Check, CreditCard, Smartphone } from 'lucide-react'
+import { Check, X } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 
 interface CourseModalProps {
 	course: Course | null
@@ -22,152 +12,165 @@ interface CourseModalProps {
 	onClose: () => void
 }
 
-export function CourseModal({ course, isOpen, onClose }: CourseModalProps) {
-	if (!course) return null
+export default function CourseModal({
+	course,
+	isOpen,
+	onClose,
+}: CourseModalProps) {
+	const router = useRouter()
 
-	const { language } = useLanguage()
-	const router = useRouter() // ✅ useNavigate emas
-	const { toast } = useToast()
+	if (!course || !isOpen) return null
 
-	const [selectedPayment, setSelectedPayment] = useState<string | null>(null)
+	const formatPrice = (price: number) => price.toLocaleString('ru-RU') + " so'm"
 
-	const title =
-		language === 'uz' ? course.titleUz ?? course.title : course.title
-	const description =
-		language === 'uz'
-			? course.descriptionUz ?? course.description
-			: course.description
-
-	const rawFeatures =
-		language === 'uz' ? course.featuresUz ?? course.features : course.features
-
-	const features = Array.isArray(rawFeatures) ? rawFeatures : []
-
-	const formatPrice = (price: number) =>
-		new Intl.NumberFormat('uz-UZ').format(price) + " so'm"
-
-	const paymentMethods = [
-		{ name: 'Click', icon: Smartphone },
-		{ name: 'Payme', icon: Smartphone },
-		{ name: 'Uzcard', icon: CreditCard },
-		{ name: 'Payze', icon: CreditCard },
-	]
-
-	const handlePayment = (method: string) => {
-		setSelectedPayment(method)
-
-		const courseTitle = title
-
-		// ✅ NEXT.JS Router
-		router.push(`/payment-success?course=${encodeURIComponent(courseTitle)}`)
-
+	const handlePayment = () => {
+		router.push(`/payment-success?course=${encodeURIComponent(course.title)}`)
 		onClose()
-
-		toast({
-			title: 'To‘lovga yo‘naltirilmoqda',
-			description: `${method} orqali to‘lov sahifasiga yo‘naltirildingiz`,
-		})
 	}
 
 	return (
-		<Dialog open={isOpen} onOpenChange={onClose}>
-			<DialogContent className='max-w-2xl max-h-[90vh] overflow-y-auto'>
-				<DialogHeader>
-					<DialogTitle className='text-2xl'>{title}</DialogTitle>
-					<DialogDescription>{description}</DialogDescription>
-				</DialogHeader>
+		<>
+			{/* Overlay — tashqariga bosganda yopiladi */}
+			<div
+				className='fixed inset-0 z-50 bg-black/70 backdrop-blur-sm transition-opacity'
+				onClick={onClose}
+			/>
 
-				<div className='space-y-6'>
-					{/* Image */}
-					<div className='aspect-video bg-gradient-to-br from-sky-100 to-blue-100 rounded-xl overflow-hidden'>
-						<img
-							src={course.image}
-							alt={title}
-							className='w-full h-full object-cover'
-							onError={e => {
-								e.currentTarget.src = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='340'%3E%3Crect fill='%23E0F2FE' width='600' height='340'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%230F172A' font-size='24' font-family='Arial'%3E${course.category}%3C/text%3E%3C/svg%3E`
-							}}
-						/>
-					</div>
-					{/* Details */}
-					<div>
-						<h3 className='font-semibold text-lg mb-3'>Kurs tafsilotlari:</h3>
-						<div className='grid grid-cols-2 gap-4 text-sm'>
-							<div>
-								<span className='text-slate-600'>Davomiyligi:</span>
-								<div className='font-medium'>{course.duration}</div>
-							</div>
-							<div>
-								<span className='text-slate-600'>Format:</span>
-								<div className='font-medium capitalize'>{course.format}</div>
-							</div>
-							<div>
-								<span className='text-slate-600'>Daraja:</span>
-								<div className='font-medium'>{course.level}</div>
-							</div>
-							<div>
-								<span className='text-slate-600'>Boshlanishi:</span>
-								<div className='font-medium'>
-									{new Date(course.startDate).toLocaleDateString('uz-UZ')}
-								</div>
-							</div>
-						</div>
-					</div>
-					{/* Features */}
-					<div>
-						<h3 className='font-semibold text-lg mb-3'>Kursga kiradi:</h3>
-						<ul className='space-y-2'>
-							{features.map((feature: string, index: number) => (
-								<li key={index} className='flex items-start gap-2'>
-									<Check className='w-5 h-5 text-sky-600 flex-shrink-0 mt-0.5' />
-									<span className='text-sm text-slate-700'>{feature}</span>
-								</li>
-							))}
-						</ul>
-					</div>
-					{/* Payment */}
-					<div className='border-t pt-6'>
-						<div className='flex items-center justify-between mb-6'>
-							<div>
-								<div className='text-sm text-slate-600'>Jami narx:</div>
-								<div className='text-3xl font-bold text-slate-900'>
-									{formatPrice(course.price)}
-								</div>
-							</div>
-						</div>
-
-						<div className='mb-6'>
-							<h3 className='font-semibold text-sm mb-3'>
-								To‘lov usulini tanlang:
-							</h3>
-							<div className='grid grid-cols-2 gap-3'>
-								{paymentMethods.map(method => (
-									<Button
-										key={method.name}
-										variant={
-											selectedPayment === method.name ? 'default' : 'outline'
-										}
-										className='h-auto py-4 gap-2'
-										onClick={() => handlePayment(method.name)}
-									>
-										<method.icon className='w-5 h-5' />
-										{method.name}
-									</Button>
-								))}
-							</div>
-						</div>
-
-						<Button
-							className='w-full'
-							size='lg'
+			{/* Modal — faqat kerakli joyni egallaydi */}
+			<div className='fixed inset-0 z-50 overflow-y-auto'>
+				<div className='flex min-h-full items-center justify-center p-4'>
+					<div
+						className='relative w-full max-w-md rounded-3xl bg-[#0b1426] text-white shadow-2xl'
+						onClick={e => e.stopPropagation()} // ichkariga bosganda yopilmasin
+					>
+						{/* Close Button */}
+						<button
 							onClick={onClose}
-							variant='outline'
+							className='absolute right-4 top-4 z-10 rounded-full p-2 transition hover:bg-white/10'
 						>
-							Yopish
-						</Button>
+							<X size={22} className='text-white/70' />
+						</button>
+
+						{/* Hero Image */}
+						<div className='relative h-52 overflow-hidden rounded-t-3xl bg-gradient-to-br from-cyan-100 to-blue-100'>
+							{course.image ? (
+								<img
+									src={course.image}
+									alt={course.title}
+									className='h-full w-full object-cover'
+								/>
+							) : (
+								<div className='flex h-full items-center justify-center'>
+									<span className='text-5xl font-bold text-[#0b1426]/20'>
+										{course.category}
+									</span>
+								</div>
+							)}
+						</div>
+
+						{/* Content */}
+						<div className='p-6'>
+							{/* Category */}
+							<div className='mb-3 inline-block rounded-full bg-[#0ea5e9] px-4 py-1.5 text-sm font-bold'>
+								{course.category}
+							</div>
+
+							{/* Title */}
+							<h2 className='text-2xl font-black leading-tight'>
+								{course.title}
+							</h2>
+							{course.description && (
+								<p className='mt-2 text-sm text-white/70'>
+									{course.description}
+								</p>
+							)}
+
+							{/* Details */}
+							<div className='mt-6'>
+								<h3 className='mb-3 text-lg font-bold'>Kurs tili:</h3>
+								<div className='grid grid-cols-2 gap-3 text-sm'>
+									<div className='rounded-xl bg-white/5 p-3'>
+										<span className='text-white/60'>Davomiyligi:</span>
+										<p className='font-semibold'>{course.duration}</p>
+									</div>
+									<div className='rounded-xl bg-white/5 p-3'>
+										<span className='text-white/60'>Format:</span>
+										<p className='font-semibold'>{course.format}</p>
+									</div>
+									<div className='rounded-xl bg-white/5 p-3'>
+										<span className='text-white/60'>Daraja:</span>
+										<p className='font-semibold'>{course.level}</p>
+									</div>
+									<div className='rounded-xl bg-white/5 p-3'>
+										<span className='text-white/60'>Boshlanishi:</span>
+										<p className='font-semibold'>
+											{new Date(course.startDate).toLocaleDateString('uz-UZ')}
+										</p>
+									</div>
+								</div>
+							</div>
+
+							{/* Features */}
+							{course.features && course.features.length > 0 && (
+								<div className='mt-6'>
+									<h3 className='mb-3 text-lg font-bold'>Kursga kiradi:</h3>
+									<ul className='space-y-2'>
+										{course.features.map((feature, i) => (
+											<li key={i} className='flex items-center gap-3 text-sm'>
+												<Check size={18} className='text-cyan-400' />
+												<span>{feature}</span>
+											</li>
+										))}
+									</ul>
+								</div>
+							)}
+
+							{/* Narx + Tugma – FINAL VERSIYA (ikki qator bo‘lmaydi, fontlar kichikroq) */}
+							<div className='mt-8 border-t border-white/10 pt-6'>
+								<div className='flex items-end justify-between gap-6'>
+									{/* Narx qismi */}
+									<div className='flex flex-col'>
+										<span className='text-xs font-medium text-white/60 mb-1'>
+											Jami narx
+										</span>
+										<div className='flex items-baseline gap-2'>
+											<span className='text-4xl font-black text-white tracking-tighter'>
+												{formatPrice(course.price).replace(" so'm", '')}
+											</span>
+											<span className='text-xl font-bold text-white/80'>
+												so'm
+											</span>
+										</div>
+										<span className='text-xs text-white/50 mt-1'>
+											kurs uchun
+										</span>
+									</div>
+
+									{/* Xarid qilish tugmasi */}
+									<button
+										onClick={handlePayment}
+										className='flex shrink-0 items-center gap-3 whitespace-nowrap rounded-2xl bg-white px-7 py-3.5 text-lg font-bold text-[#0b1426] shadow-lg transition-all hover:shadow-xl active:scale-95'
+									>
+										Xarid qilish
+										<svg
+											width='20'
+											height='20'
+											viewBox='0 0 24 24'
+											fill='none'
+											stroke='currentColor'
+											strokeWidth='3'
+											strokeLinecap='round'
+											strokeLinejoin='round'
+										>
+											<path d='M7 17l9.2-9.2M17 17l-9.2-9.2' />
+										</svg>
+									</button>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
-			</DialogContent>
-		</Dialog>
+			</div>
+		</>
 	)
 }

@@ -1,118 +1,142 @@
-import { Facebook, Instagram, Mail, MapPin, Phone, Youtube } from 'lucide-react'
+// components/Footer.tsx
+import {
+	Facebook,
+	Instagram,
+	Mail,
+	MapPin,
+	MessageCircle,
+	Phone,
+	Youtube,
+} from 'lucide-react'
 import Link from 'next/link'
+;<MessageCircle className='w-6 h-6' />
 
 export function Footer() {
+	const currentYear = new Date().getFullYear()
+
+	const socialLinks = [
+		{
+			icon: MessageCircle,
+			href: 'https://t.me/alibek_allaberganov',
+			label: 'Telegram',
+		},
+		{
+			icon: Instagram,
+			href: 'https://instagram.com/alibek_ielts',
+			label: 'Instagram',
+		},
+		{
+			icon: Youtube,
+			href: 'https://youtube.com/@alibekielts',
+			label: 'YouTube',
+		},
+		{
+			icon: Facebook,
+			href: 'https://facebook.com/alibekenglish',
+			label: 'Facebook',
+		},
+	]
+
+	const quickLinks = [
+		{ href: '/', label: 'Bosh sahifa' },
+		{ href: '/courses', label: 'Kurslar' },
+		{ href: '/about', label: 'Men haqimda' },
+		{ href: '/resources', label: 'Resurslar' },
+		{ href: '/contact', label: 'Aloqa' },
+	]
+
 	return (
-		<footer className='bg-slate-900 text-white'>
-			<div className='container mx-auto px-4 sm:px-6 lg:px-8 py-12'>
-				<div className='grid grid-cols-1 md:grid-cols-4 gap-8'>
-					<div>
-						<div className='flex items-center gap-3 mb-4'>
-							<div className='w-10 h-10 bg-sky-600 rounded-lg flex items-center justify-center'>
-								<span className='text-white font-bold text-xl'>A</span>
+		<footer className='bg-[#0b1327] border-t border-white/10'>
+			<div className='container mx-auto px-6 py-16'>
+				<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12'>
+					{/* Brend */}
+					<div className='space-y-6'>
+						<div className='flex items-center gap-4'>
+							<div className='w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center shadow-xl'>
+								<span className='text-white font-black text-2xl'>A</span>
 							</div>
 							<div>
-								<div className='font-bold'>Alibek Allaberganov</div>
-								<div className='text-xs text-slate-400'>English Teacher</div>
+								<h3 className='font-bold text-xl text-white'>
+									Alibek Allaberganov
+								</h3>
+								<p className='text-cyan-400 text-sm font-medium'>
+									IELTS Expert
+								</p>
 							</div>
 						</div>
-						<p className='text-sm text-slate-400'>
-							Professional English Teacher & IELTS Expert based in Tashkent,
-							Uzbekistan
+						<p className='text-gray-400 text-sm leading-relaxed max-w-xs'>
+							Professional ingliz tili o‘qituvchisi va IELTS mutaxassisi. 1000+
+							talaba 7+ ball oldi.
 						</p>
 					</div>
 
+					{/* Quick Links */}
 					<div>
-						<h3 className='font-semibold mb-4'>Quick Links</h3>
-						<ul className='space-y-2 text-sm text-slate-400'>
-							<li>
-								<Link href='/' className='hover:text-white transition-colors'>
-									Home
-								</Link>
+						<h3 className='font-bold text-lg text-white mb-6'>
+							Tezkor havolalar
+						</h3>
+						<ul className='space-y-3'>
+							{quickLinks.map(link => (
+								<li key={link.href}>
+									<Link
+										href={link.href}
+										className='text-gray-400 hover:text-cyan-400 transition-colors duration-200 flex items-center gap-2 group'
+									>
+										<span className='w-1.5 h-1.5 bg-cyan-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity' />
+										{link.label}
+									</Link>
+								</li>
+							))}
+						</ul>
+					</div>
+
+					{/* Kontakt */}
+					<div>
+						<h3 className='font-bold text-lg text-white mb-6'>Bog‘lanish</h3>
+						<ul className='space-y-4 text-gray-400'>
+							<li className='flex items-center gap-3'>
+								<Phone className='w-5 h-5 text-cyan-400' />
+								<span className='text-sm'>+998 99 123 45 67</span>
 							</li>
-							<li>
-								<Link
-									href='/courses'
-									className='hover:text-white transition-colors'
-								>
-									Courses
-								</Link>
+							<li className='flex items-center gap-3'>
+								<Mail className='w-5 h-5 text-cyan-400' />
+								<span className='text-sm'>alibek@english.uz</span>
 							</li>
-							<li>
-								<Link
-									href='/about'
-									className='hover:text-white transition-colors'
-								>
-									About
-								</Link>
-							</li>
-							<li>
-								<Link
-									href='/resources'
-									className='hover:text-white transition-colors'
-								>
-									Resources
-								</Link>
-							</li>
-							<li>
-								<Link
-									href='/contact'
-									className='hover:text-white transition-colors'
-								>
-									Contact
-								</Link>
+							<li className='flex items-center gap-3'>
+								<MapPin className='w-5 h-5 text-cyan-400' />
+								<span className='text-sm'>Toshkent, O‘zbekiston</span>
 							</li>
 						</ul>
 					</div>
 
+					{/* Ijtimoiy tarmoqlar */}
 					<div>
-						<h3 className='font-semibold mb-4'>Contact</h3>
-						<ul className='space-y-3 text-sm text-slate-400'>
-							<li className='flex items-start gap-2'>
-								<Phone className='w-4 h-4 mt-0.5 flex-shrink-0' />
-								<span>+998 90 123 45 67</span>
-							</li>
-							<li className='flex items-start gap-2'>
-								<Mail className='w-4 h-4 mt-0.5 flex-shrink-0' />
-								<span>alibek@english.uz</span>
-							</li>
-							<li className='flex items-start gap-2'>
-								<MapPin className='w-4 h-4 mt-0.5 flex-shrink-0' />
-								<span>Tashkent, Uzbekistan</span>
-							</li>
-						</ul>
-					</div>
-
-					<div>
-						<h3 className='font-semibold mb-4'>Follow Me</h3>
-						<div className='flex gap-3'>
-							<a
-								href='#'
-								className='w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center hover:bg-sky-600 transition-colors'
-							>
-								<Instagram className='w-5 h-5' />
-							</a>
-							<a
-								href='#'
-								className='w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center hover:bg-sky-600 transition-colors'
-							>
-								<Facebook className='w-5 h-5' />
-							</a>
-							<a
-								href='#'
-								className='w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center hover:bg-sky-600 transition-colors'
-							>
-								<Youtube className='w-5 h-5' />
-							</a>
+						<h3 className='font-bold text-lg text-white mb-6'>Meni kuzating</h3>
+						<div className='flex gap-4'>
+							{socialLinks.map(social => (
+								<a
+									key={social.label}
+									href={social.href}
+									target='_blank'
+									rel='noopener noreferrer'
+									aria-label={social.label}
+									className='group w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center transition-all duration-300 hover:bg-cyan-500/20 hover:border-cyan-500/50 hover:scale-110'
+								>
+									<social.icon className='w-6 h-6 text-gray-400 group-hover:text-cyan-400 transition-colors' />
+								</a>
+							))}
 						</div>
 					</div>
 				</div>
 
-				<div className='border-t border-slate-800 mt-12 pt-8 text-center text-sm text-slate-400'>
-					<p>© 2025 Alibek Allaberganov. All rights reserved.</p>
+				{/* Copyright */}
+				<div className='mt-16 pt-8 border-t border-white/10 text-center'>
+					<p className='text-gray-500 text-sm'>
+						© {currentYear} Alibek Allaberganov. Barcha huquqlar himoyalangan.
+					</p>
+					<p className='text-gray-600 text-xs mt-2'>Made with by Alibek</p>
 				</div>
 			</div>
 		</footer>
 	)
 }
-
