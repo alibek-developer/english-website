@@ -8,7 +8,7 @@ import { Providers } from './providers'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-	title: 'Alibek Allaberganov - Professional English Teacher',
+	title: 'Tulkin Rajabbaev - Professional English Teacher',
 	description:
 		'Learn English with Alibek Allaberganov, IELTS 8.0+ expert and professional English teacher in Tashkent, Uzbekistan.',
 }

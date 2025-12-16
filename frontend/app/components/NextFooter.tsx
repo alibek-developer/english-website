@@ -17,12 +17,12 @@ export function Footer() {
 	const socialLinks = [
 		{
 			icon: MessageCircle,
-			href: 'https://t.me/alibek_allaberganov',
+			href: 'https://t.me/Tulkin_tour_guide',
 			label: 'Telegram',
 		},
 		{
 			icon: Instagram,
-			href: 'https://instagram.com/alibek_ielts',
+			href: 'https://www.instagram.com/tulkin_rajabbaev',
 			label: 'Instagram',
 		},
 		{
@@ -53,11 +53,11 @@ export function Footer() {
 					<div className='space-y-6'>
 						<div className='flex items-center gap-4'>
 							<div className='w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center shadow-xl'>
-								<span className='text-white font-black text-2xl'>A</span>
+								<span className='text-white font-black text-2xl'>T</span>
 							</div>
 							<div>
 								<h3 className='font-bold text-xl text-white'>
-									Alibek Allaberganov
+									Tulkin Rajabbaev
 								</h3>
 								<p className='text-cyan-400 text-sm font-medium'>
 									IELTS Expert
@@ -96,15 +96,15 @@ export function Footer() {
 						<ul className='space-y-4 text-gray-400'>
 							<li className='flex items-center gap-3'>
 								<Phone className='w-5 h-5 text-cyan-400' />
-								<span className='text-sm'>+998 99 123 45 67</span>
+								<span className='text-sm'>+998 99 505 16 92</span>
 							</li>
 							<li className='flex items-center gap-3'>
 								<Mail className='w-5 h-5 text-cyan-400' />
-								<span className='text-sm'>alibek@english.uz</span>
+								<span className='text-sm'>trajabboyev@gmail.com</span>
 							</li>
 							<li className='flex items-center gap-3'>
 								<MapPin className='w-5 h-5 text-cyan-400' />
-								<span className='text-sm'>Toshkent, O‘zbekiston</span>
+								<span className='text-sm'>Xorazm, O‘zbekiston</span>
 							</li>
 						</ul>
 					</div>
@@ -132,7 +132,7 @@ export function Footer() {
 				{/* Copyright */}
 				<div className='mt-16 pt-8 border-t border-white/10 text-center'>
 					<p className='text-gray-500 text-sm'>
-						© {currentYear} Alibek Allaberganov. Barcha huquqlar himoyalangan.
+						© {currentYear} Tulkin Rajabbaev. Barcha huquqlar himoyalangan.
 					</p>
 					<p className='text-gray-600 text-xs mt-2'>Made with by Alibek</p>
 				</div>

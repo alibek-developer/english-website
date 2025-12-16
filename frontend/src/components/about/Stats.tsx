@@ -2,6 +2,10 @@
 
 import { motion } from 'framer-motion'
 import { Award, Clock, Target, Users } from 'lucide-react'
+import Image from 'next/image'
+
+// Rasmni import qilish (eng yaxshi usul – Next.js avtomatik optimallashtiradi)
+import teacher2 from '@/assents/images/about-img/teacher-2.jpg'
 
 export default function AboutPage() {
 	const stats = [
@@ -38,7 +42,7 @@ export default function AboutPage() {
 					transition={{ delay: 0.2 }}
 					className='text-5xl md:text-7xl font-extrabold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mt-4'
 				>
-					Alibek Allaberganov
+					Tulkin Rajabbaev
 				</motion.h1>
 				<motion.p
 					initial={{ opacity: 0 }}
@@ -60,10 +64,15 @@ export default function AboutPage() {
 						viewport={{ once: true }}
 						className='relative'
 					>
-						<div className='bg-gradient-to-br from-cyan-100 to-blue-100 rounded-3xl w-full aspect-square flex items-center justify-center shadow-2xl'>
-							<span className='text-3xl font-bold text-[#0b1327]/70'>
-								Alibek Allaberganov
-							</span>
+						<div>
+							<Image
+								src={teacher2}
+								alt="Ikkinchi o'qituvchi - Wave English jamoasi"
+								width={400} // o'zingizga mos o'lcham qo'ying
+								height={500} // yoki placeholder bilan
+								className=' rounded-3xl w-full   aspect-square flex items-center justify-center shadow-2xl object-cover'
+								priority // agar about sahifasi muhim bo'lsa (tez yuklansin)
+							/>
 						</div>
 					</motion.div>
 

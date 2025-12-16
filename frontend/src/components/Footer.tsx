@@ -10,10 +10,10 @@ export function Footer() {
 					<div>
 						<div className='flex items-center gap-3 mb-4'>
 							<div className='w-10 h-10 bg-sky-600 rounded-lg flex items-center justify-center'>
-								<span className='text-white font-bold text-xl'>A</span>
+								<span className='text-white font-bold text-xl'>T</span>
 							</div>
 							<div>
-								<div className='font-bold'>Alibek Allaberganov</div>
+								<div className='font-bold'>Tulkin Rajabbaev</div>
 								<div className='text-xs text-slate-400'>English Teacher</div>
 							</div>
 						</div>

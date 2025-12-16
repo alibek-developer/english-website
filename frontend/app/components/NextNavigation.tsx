@@ -30,11 +30,11 @@ export function Navigation() {
 					{/* Logo */}
 					<Link href='/' className='flex items-center gap-3 group'>
 						<div className='w-11 h-11 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center shadow-lg group-hover:scale-110 transition-all duration-300'>
-							<span className='text-white font-black text-xl'>A</span>
+							<span className='text-white font-black text-xl'>T</span>
 						</div>
 						<div className='hidden lg:block'>
 							<div className='font-bold text-lg text-slate-900 dark:text-white'>
-								Alibek Allaberganov
+								Tulkin Rajabbaev
 							</div>
 							<div className='text-xs text-slate-600 dark:text-cyan-400 font-medium'>
 								IELTS Expert

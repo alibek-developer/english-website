@@ -790,6 +790,9 @@ video {
 .h-px {
   height: 1px;
 }
+.h-auto {
+  height: auto;
+}
 .max-h-\[90vh\] {
   max-height: 90vh;
 }
