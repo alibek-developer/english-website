@@ -60,7 +60,7 @@ export function HeroSection() {
 						</h1>
 
 						<p className='text-lg md:text-xl text-slate-600 dark:text-slate-300 mb-8 leading-relaxed'>
-							Professional o'qituvchi Tulkin Rajabbaev bilan ingliz tilini
+							Professional o'qituvchi Tulkin Rajabbayev bilan ingliz tilini
 							mukammal darajada o'rganing va IELTS imtihonida yuqori natijaga
 							erishing
 						</p>
