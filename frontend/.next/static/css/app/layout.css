@@ -790,9 +790,6 @@ video {
 .h-px {
   height: 1px;
 }
-.h-auto {
-  height: auto;
-}
 .max-h-\[90vh\] {
   max-height: 90vh;
 }
@@ -1646,9 +1643,6 @@ video {
 }
 .text-\[\#0b1327\]\/10 {
   color: rgb(11 19 39 / 0.1);
-}
-.text-\[\#0b1327\]\/70 {
-  color: rgb(11 19 39 / 0.7);
 }
 .text-\[\#0b1426\] {
   --tw-text-opacity: 1;
