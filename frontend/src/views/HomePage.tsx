@@ -1,20 +1,19 @@
 'use client'
 
-import { HeroSection } from '@/components/home/HeroSection'
+import { CTASection } from '@/components/home/CTASection'
 import { FeaturedCourses } from '@/components/home/FeaturedCourses'
+import { HeroSection } from '@/components/home/HeroSection'
 import { StatsSection } from '@/components/home/StatsSection'
 import { TestimonialsCarousel } from '@/components/home/TestimonialsCarousel'
-import { CTASection } from '@/components/home/CTASection'
 
 export function HomePage() {
-  return (
-    <main>
-      <HeroSection />
-      <StatsSection />
-      <FeaturedCourses />
-      <TestimonialsCarousel />
-      <CTASection />
-    </main>
-  )
+	return (
+		<main>
+			<HeroSection />
+			<StatsSection />
+			<FeaturedCourses />
+			<TestimonialsCarousel />
+			<CTASection />
+		</main>
+	)
 }
-

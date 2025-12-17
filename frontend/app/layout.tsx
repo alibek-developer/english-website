@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
 	title: 'Tulkin Rajabbaev - Professional English Teacher',
 	description:
-		'Learn English with Alibek Allaberganov, IELTS 8.0+ expert and professional English teacher in Tashkent, Uzbekistan.',
+		'Learn English with Tulkin Rajabbaev, IELTS 8.0+ expert and professional English teacher in Tashkent, Uzbekistan.',
 }
 
 export default function RootLayout({
