@@ -61,8 +61,8 @@ export function HeroSection() {
 
 						<p className='text-lg md:text-xl text-slate-600 dark:text-slate-300 mb-8 leading-relaxed'>
 							Professional o'qituvchi Tulkin Rajabbayev bilan ingliz tilini
-							mukammal darajada o'rganing va IELTS imtihonida yuqori natijaga
-							erishing
+							mukammal darajada o'rganing. Atigi 6 oydan kam muddatda IELTS 8.0+
+							ball olishingiz va yuqori natijaga erishingiz mumkin!
 						</p>
 
 						{/* BUTTONS */}
