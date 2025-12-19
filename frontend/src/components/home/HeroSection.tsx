@@ -59,10 +59,40 @@ export function HeroSection() {
 							muddatda o'rganing
 						</h1>
 
-						<p className='text-lg md:text-xl text-slate-600 dark:text-slate-300 mb-8 leading-relaxed'>
+						{/* <p className='text-lg md:text-xl text-slate-600 dark:text-slate-300 mb-8 leading-relaxed'>
+							Professional o'qituvchi Tulkin Rajabbayev bilan ingliz tilini
+							mukammal darajada o'rganing. Atigi 6 oydan kam muddatda IELTS 8.0+
+							ball olishingiz va yuqori natijaga erishingiz mumkin! Men Tulkin
+							Rajabbayev, 8 yildan ortiq tajribaga ega professional IELTS
+							eksperti va ingliz tili o‘qituvchisiman. Shaxsiy IELTS natijam –
+							8.5 ball. 1000+ talabaga xorijiy universitetlarga kirish, viza
+							olish va karyerada muvaffaqiyat qozonishda yordam berganman.
+						</p> */}
+
+						<p className='text-lg md:text-xl text-slate-300 mt-6 leading-relaxed'>
 							Professional o'qituvchi Tulkin Rajabbayev bilan ingliz tilini
 							mukammal darajada o'rganing. Atigi 6 oydan kam muddatda IELTS 8.0+
 							ball olishingiz va yuqori natijaga erishingiz mumkin!
+						</p>
+
+						<p className='text-lg md:text-xl text-slate-300 mt-8'>
+							Men – Tulkin Rajabbayev, professional IELTS eksperti. Shaxsiy
+							IELTS natijam – 8.5 ball. 8 yildan ortiq tajribaga egaman va 1000+
+							talabaga yordam berganman.
+						</p>
+
+						<ul className='list-disc list-inside text-lg text-slate-300 mt-8 space-y-4 max-w-2xl mx-auto'>
+							<li>Xorijiy universitetlarga kirishda IELTS 8.0+ ball olish</li>
+							<li>Viza va emigratsiya uchun yuqori natijalar</li>
+							<li>
+								Xalqaro kompaniyalarda ishga joylashish va karyera o'sishi
+							</li>
+							<li>Real hayotda bemalol inglizcha gaplashish</li>
+						</ul>
+
+						<p className='text-lg md:text-xl text-slate-300 mt-8 mb-5'>
+							Bizning metodika qisqa muddatda real natija beradi – keling,
+							sizning muvaffaqiyatingizni birga yaratalik!
 						</p>
 
 						{/* BUTTONS */}
