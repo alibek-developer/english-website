@@ -14,9 +14,16 @@ export function StatsSection() {
 	]
 
 	return (
-		<section ref={ref} className='py-20 bg-slate-50'>
-			<div className='container mx-auto px-4 sm:px-6 lg:px-8'>
-				<div className='grid grid-cols-2 md:grid-cols-4 gap-8'>
+		<section
+			ref={ref}
+			className='py-24 bg-gradient-to-b from-slate-100 to-slate-50 dark:from-gray-800 dark:to-gray-900 
+				transition-all duration-500 relative overflow-hidden'
+		>
+			{/* Qo'shimcha: nozik ajratuvchi chiziq pastda */}
+			<div className='absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-slate-300 dark:via-slate-700 to-transparent' />
+
+			<div className='container mx-auto px-4 sm:px-6 lg:px-8 relative z-10'>
+				<div className='grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12'>
 					{stats.map((stat, index) => (
 						<StatCounter
 							key={index}
@@ -64,19 +71,26 @@ function StatCounter({
 
 	return (
 		<motion.div
-			initial={{ opacity: 0, y: 20 }}
+			initial={{ opacity: 0, y: 30 }}
 			animate={isInView ? { opacity: 1, y: 0 } : {}}
-			transition={{ duration: 0.5, delay: index * 0.1 }}
-			className='text-center'
+			transition={{ duration: 0.7, delay: index * 0.15 }}
+			className='text-center group'
 		>
-			<div className='w-16 h-16 bg-sky-100 rounded-2xl flex items-center justify-center mx-auto mb-4'>
-				<Icon className='w-8 h-8 text-sky-600' />
+			<div
+				className='w-18 h-18 bg-sky-100/80 dark:bg-sky-900/40 backdrop-blur-sm rounded-3xl 
+				flex items-center justify-center mx-auto mb-6 shadow-lg dark:shadow-2xl 
+				transition-all duration-300 group-hover:scale-110 group-hover:shadow-xl 
+				dark:group-hover:shadow-sky-900/50'
+			>
+				<Icon className='w-9 h-9 text-sky-600 dark:text-sky-400' />
 			</div>
-			<div className='text-4xl font-bold text-slate-900 mb-2'>
+			<div className='text-5xl font-extrabold text-slate-900 dark:text-white mb-3'>
 				{count}
 				{suffix}
 			</div>
-			<div className='text-sm text-slate-600'>{label}</div>
+			<div className='text-base font-medium text-slate-600 dark:text-slate-300'>
+				{label}
+			</div>
 		</motion.div>
 	)
 }

@@ -10,7 +10,7 @@ const contactResources = [
 		description: 'Tezkor javob beraman 24/7',
 		link: 'https://t.me/Tulkin_tour_guide',
 		icon: 'telegram',
-		type: 'messenger', // agar type majburiy bo‘lsa
+		type: 'messenger',
 	},
 	{
 		id: 2,
@@ -40,22 +40,24 @@ const contactResources = [
 
 export default function ContactPage() {
 	return (
-		<div className='min-h-screen bg-[#0b1327] py-16 px-6'>
+		<div className='min-h-screen bg-gray-50 dark:bg-slate-950 py-16 px-6 transition-colors duration-500'>
 			<div className='max-w-4xl mx-auto'>
-				<h1 className='text-5xl font-black text-center text-white mb-4'>
+				<h1 className='text-5xl font-black text-center text-gray-900 dark:text-white mb-4'>
 					Bog‘lanish
 				</h1>
-				<p className='text-center text-gray-300 text-lg mb-12'>
+				<p className='text-center text-gray-600 dark:text-gray-400 text-lg mb-12'>
 					Savollaringiz bo‘lsa, istalgan vaqtda yozing
 				</p>
 
 				{/* Bitta kartochka (masalan, asosiy Telegram) */}
-				<div className='mb-12'>
-					<ContactCard resource={contactResources[0]} />
+				<div className='mb-16 flex justify-center'>
+					<div className='w-full max-w-md'>
+						<ContactCard resource={contactResources[0]} />
+					</div>
 				</div>
 
 				{/* Barcha kontaktlar ro‘yxati */}
-				<ContactList initialResources={contactResources} />
+				<ContactList initialResources={contactResources.slice(1)} />
 			</div>
 		</div>
 	)

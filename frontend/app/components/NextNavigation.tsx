@@ -2,10 +2,8 @@
 'use client'
 
 import { ThemeToggle } from '@/components/ThemeToggle'
-import { Button } from '@/components/ui/button'
-import { useLanguage } from '@/hooks/useLanguage'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Globe, Menu, X } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
@@ -13,7 +11,6 @@ import { useState } from 'react'
 export function Navigation() {
 	const [isOpen, setIsOpen] = useState(false)
 	const pathname = usePathname()
-	const { language, setLanguage, t } = useLanguage()
 
 	const navItems = [
 		{ path: '/', labelUz: 'Bosh sahifa' },
@@ -81,18 +78,6 @@ export function Navigation() {
 					{/* Right side */}
 					<div className='flex items-center gap-3'>
 						<ThemeToggle />
-
-						<Button
-							variant='ghost'
-							size='sm'
-							onClick={() => setLanguage(language === 'uz' ? 'en' : 'uz')}
-							className='gap-2 hover:bg-white/10 dark:hover:bg-white/5 rounded-xl'
-						>
-							<Globe className='w-4 h-4 text-slate-600 dark:text-slate-300' />
-							<span className='text-sm font-medium'>
-								{language.toUpperCase()}
-							</span>
-						</Button>
 
 						{/* Mobile menu button */}
 						<button

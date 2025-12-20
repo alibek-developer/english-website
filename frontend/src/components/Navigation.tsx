@@ -1,11 +1,8 @@
-// components/Navigation.tsx
 'use client'
 
 import { ThemeToggle } from '@/components/ThemeToggle'
-import { Button } from '@/components/ui/button'
-import { useLanguage } from '@/hooks/useLanguage'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Globe, Menu, X } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
@@ -13,18 +10,17 @@ import { useState } from 'react'
 export function Navigation() {
 	const [isOpen, setIsOpen] = useState(false)
 	const pathname = usePathname()
-	const { language, setLanguage, t } = useLanguage()
 
 	const navItems = [
-		{ path: '/', labelUz: 'Bosh sahifa' },
-		{ path: '/courses', labelUz: 'Kurslar' },
-		{ path: '/about', labelUz: 'Men haqimda' },
-		{ path: '/resources', labelUz: 'Resurslar' },
-		{ path: '/contact', labelUz: 'Aloqa' },
+		{ path: '/', label: 'Bosh sahifa' },
+		{ path: '/courses', label: 'Kurslar' },
+		{ path: '/about', label: 'Men haqimda' },
+		{ path: '/resources', label: 'Resurslar' },
+		{ path: '/contact', label: 'Aloqa' },
 	]
 
 	return (
-		<nav className='fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-[#0b1327]/90 backdrop-blur-xl border-b border-white/10 dark:border-white/5'>
+		<nav className='fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-slate-950/90 backdrop-blur-xl border-b border-gray-200/50 dark:border-slate-800/50'>
 			<div className='container mx-auto px-4 sm:px-6 lg:px-8'>
 				<div className='flex items-center justify-between h-20'>
 					{/* Logo */}
@@ -43,61 +39,61 @@ export function Navigation() {
 					</Link>
 
 					{/* Desktop Menu */}
-					<div className='hidden md:flex items-center gap-1'>
-						{navItems.map(item => (
-							<Link
-								key={item.path}
-								href={item.path}
-								className='relative px-5 py-3 rounded-xl text-sm font-medium transition-all duration-300 group'
-							>
-								<span
-									className={`relative z-10 ${
-										pathname === item.path
-											? 'text-cyan-500 dark:text-cyan-400'
-											: 'text-slate-700 dark:text-slate-300 group-hover:text-slate-900 dark:group-hover:text-white'
+					<div className='hidden md:flex items-center gap-3'>
+						{navItems.map(item => {
+							const isActive = pathname === item.path
+
+							return (
+								<Link
+									key={item.path}
+									href={item.path}
+									className={`relative px-6 py-3 rounded-2xl text-sm font-medium transition-all duration-300 ${
+										isActive ? 'z-10' : ''
 									}`}
 								>
-									{item.labelUz}
-								</span>
+									<span
+										className={`relative z-10 ${
+											isActive
+												? 'text-cyan-600 dark:text-cyan-400'
+												: 'text-slate-700 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400'
+										}`}
+									>
+										{item.label}
+									</span>
 
-								{/* Hover background */}
-								<motion.div
-									className='absolute inset-0 rounded-xl bg-cyan-500/10 dark:bg-cyan-400/10 opacity-0 group-hover:opacity-100 transition-opacity'
-									layoutId={pathname === item.path ? 'activeBg' : undefined}
-								/>
+									{/* Active pill background */}
+									<AnimatePresence>
+										{isActive && (
+											<motion.div
+												layoutId='activePill'
+												className='absolute inset-0 rounded-2xl bg-cyan-100 dark:bg-cyan-900/40 border border-cyan-300 dark:border-cyan-600 shadow-md'
+												initial={{ opacity: 0, scale: 0.9 }}
+												animate={{ opacity: 1, scale: 1 }}
+												exit={{ opacity: 0, scale: 0.9 }}
+												transition={{
+													type: 'spring',
+													stiffness: 500,
+													damping: 30,
+												}}
+											/>
+										)}
+									</AnimatePresence>
 
-								{/* Active indicator */}
-								{pathname === item.path && (
-									<motion.div
-										layoutId='activeIndicator'
-										className='absolute bottom-0 left-1/2 -translate-x-1/2 w-12 h-1 bg-cyan-500 dark:bg-cyan-400 rounded-full'
-										transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-									/>
-								)}
-							</Link>
-						))}
+									{/* Hover background */}
+									<div className='absolute inset-0 rounded-2xl bg-cyan-100/40 dark:bg-cyan-900/20 opacity-0 hover:opacity-100 transition-opacity duration-300 border border-transparent hover:border-cyan-300 dark:hover:border-cyan-600' />
+								</Link>
+							)
+						})}
 					</div>
 
-					{/* Right side */}
-					<div className='flex items-center gap-3'>
+					{/* Right side – faqat ThemeToggle qoldi */}
+					<div className='flex items-center gap-4'>
 						<ThemeToggle />
-
-						<Button
-							variant='ghost'
-							size='sm'
-							onClick={() => setLanguage(language === 'uz' ? 'en' : 'uz')}
-							className='gap-2 hover:bg-white/10 dark:hover:bg-white/5 rounded-xl'
-						>
-							<Globe className='w-4 h-4 text-slate-600 dark:text-slate-300' />
-							<span className='text-sm font-medium'>
-								{language.toUpperCase()}
-							</span>
-						</Button>
 
 						{/* Mobile menu button */}
 						<button
 							onClick={() => setIsOpen(!isOpen)}
-							className='md:hidden p-3 rounded-xl hover:bg-white/10 dark:hover:bg-white/5 transition-all'
+							className='md:hidden p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-slate-800 transition-all'
 						>
 							{isOpen ? (
 								<X className='w-6 h-6 text-slate-700 dark:text-white' />
@@ -116,7 +112,7 @@ export function Navigation() {
 						initial={{ opacity: 0, y: -20 }}
 						animate={{ opacity: 1, y: 0 }}
 						exit={{ opacity: 0, y: -20 }}
-						className='md:hidden absolute top-full left-0 right-0 bg-white/95 dark:bg-[#0b1327]/95 backdrop-blur-xl border-t border-white/10 dark:border-white/5 shadow-2xl'
+						className='md:hidden absolute top-full left-0 right-0 bg-white/95 dark:bg-slate-950/95 backdrop-blur-xl border-t border-gray-200 dark:border-slate-800 shadow-2xl'
 					>
 						<div className='container mx-auto px-6 py-6 space-y-3'>
 							{navItems.map(item => (
@@ -127,10 +123,10 @@ export function Navigation() {
 									className={`block px-6 py-4 rounded-2xl text-lg font-medium transition-all ${
 										pathname === item.path
 											? 'bg-cyan-500 text-white shadow-lg'
-											: 'text-slate-700 dark:text-slate-200 hover:bg-white/10 dark:hover:bg-white/5'
+											: 'text-slate-700 dark:text-slate-200 hover:bg-gray-100 dark:hover:bg-slate-800'
 									}`}
 								>
-									{item.labelUz}
+									{item.label}
 								</Link>
 							))}
 						</div>

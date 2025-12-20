@@ -15,20 +15,25 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 	const [theme, setTheme] = useState<Theme>('light')
 	const [mounted, setMounted] = useState(false)
 
-	// Initialize theme from localStorage after mount
 	useEffect(() => {
 		setMounted(true)
 		const saved = localStorage.getItem('theme') as Theme | null
-		if (saved === 'light' || saved === 'dark') {
-			setTheme(saved)
+
+		// Qo‘shimcha: tizim theme sini ham hisobga olish
+		const prefersDark = window.matchMedia(
+			'(prefers-color-scheme: dark)'
+		).matches
+		const initial = saved || (prefersDark ? 'dark' : 'light')
+
+		if (initial === 'dark' || initial === 'light') {
+			setTheme(initial)
 		}
 	}, [])
 
-	// Apply theme changes
 	useEffect(() => {
 		if (!mounted) return
 
-		const root = window.document.documentElement
+		const root = document.documentElement
 		if (theme === 'dark') {
 			root.classList.add('dark')
 		} else {

@@ -62,9 +62,9 @@ export default function CoursesPage() {
 	const [isScheduleModalOpen, setIsScheduleModalOpen] = useState(false)
 
 	return (
-		<div className='min-h-screen bg-[#0b1327] px-6 py-12'>
+		<div className='min-h-screen bg-gray-50 dark:bg-slate-900 px-6 py-12 transition-colors duration-500'>
 			<div className='mx-auto max-w-7xl'>
-				<h1 className='mb-12 text-center text-5xl font-black text-white md:text-6xl'>
+				<h1 className='mb-12 text-center text-5xl font-black text-gray-900 dark:text-white md:text-6xl'>
 					Bizning kurslar
 				</h1>
 

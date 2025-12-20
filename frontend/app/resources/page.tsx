@@ -58,13 +58,13 @@ export default function ResourcesPage() {
 	]
 
 	return (
-		<div className='min-h-screen bg-[#0b1327] text-white'>
+		<div className='min-h-screen bg-gray-50 dark:bg-slate-950 text-gray-900 dark:text-white transition-colors duration-500'>
 			{/* Hero */}
 			<section className='pt-20 pb-16 text-center px-6'>
 				<motion.h1
 					initial={{ opacity: 0, y: 20 }}
 					animate={{ opacity: 1, y: 0 }}
-					className='text-5xl md:text-6xl font-black bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent'
+					className='text-5xl md:text-6xl font-black bg-gradient-to-r from-cyan-500 to-blue-600 dark:from-cyan-400 dark:to-blue-500 bg-clip-text text-transparent'
 				>
 					O‘rganing va mashq qiling
 				</motion.h1>
@@ -72,7 +72,7 @@ export default function ResourcesPage() {
 					initial={{ opacity: 0, y: 20 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ delay: 0.2 }}
-					className='text-3xl md:text-4xl font-bold mt-4'
+					className='text-3xl md:text-4xl font-bold mt-4 text-gray-800 dark:text-gray-200'
 				>
 					Bepul
 				</motion.h2>
@@ -80,7 +80,7 @@ export default function ResourcesPage() {
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
 					transition={{ delay: 0.4 }}
-					className='text-gray-300 text-lg mt-4 max-w-3xl mx-auto'
+					className='text-gray-600 dark:text-gray-400 text-lg mt-4 max-w-3xl mx-auto'
 				>
 					Ingliz tilini yaxshilash uchun bepul materiallarni yuklab oling va
 					qo‘y videolarni tomosha qiling
@@ -94,7 +94,7 @@ export default function ResourcesPage() {
 						initial={{ opacity: 0, x: -50 }}
 						whileInView={{ opacity: 1, x: 0 }}
 						viewport={{ once: true }}
-						className='text-3xl md:text-4xl font-bold mb-12 text-center'
+						className='text-3xl md:text-4xl font-bold mb-12 text-center text-gray-800 dark:text-white'
 					>
 						Yuklab olish uchun materiallar
 					</motion.h2>
@@ -109,15 +109,19 @@ export default function ResourcesPage() {
 								transition={{ delay: i * 0.1 }}
 								className='group'
 							>
-								<div className='bg-white/10 backdrop-blur-md rounded-3xl p-8 border border-white/10 hover:border-white/30 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/20'>
+								<div className='bg-white dark:bg-slate-800/70 backdrop-blur-md rounded-3xl p-8 border border-gray-200 dark:border-slate-700 hover:border-sky-500 dark:hover:border-sky-400 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-sky-500/20 dark:hover:shadow-sky-400/30'>
 									<div
-										className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${item.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}
+										className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${item.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg`}
 									>
 										<item.icon className='w-9 h-9 text-white' />
 									</div>
-									<h3 className='text-xl font-bold mb-3'>{item.title}</h3>
-									<p className='text-gray-300 text-sm mb-6'>{item.desc}</p>
-									<button className='flex items-center gap-3 text-cyan-400 font-semibold hover:gap-4 transition-all'>
+									<h3 className='text-xl font-bold mb-3 text-gray-900 dark:text-white'>
+										{item.title}
+									</h3>
+									<p className='text-gray-600 dark:text-gray-300 text-sm mb-6'>
+										{item.desc}
+									</p>
+									<button className='flex items-center gap-3 text-sky-600 dark:text-sky-400 font-semibold hover:gap-4 transition-all'>
 										Yuklab olish <Download className='w-5 h-5' />
 									</button>
 								</div>
@@ -128,13 +132,13 @@ export default function ResourcesPage() {
 			</section>
 
 			{/* Video darslar */}
-			<section className='py-16 px-6 bg-black/30'>
+			<section className='py-16 px-6 bg-gray-100 dark:bg-slate-800/50'>
 				<div className='max-w-7xl mx-auto'>
 					<motion.h2
 						initial={{ opacity: 0, x: -50 }}
 						whileInView={{ opacity: 1, x: 0 }}
 						viewport={{ once: true }}
-						className='text-3xl md:text-4xl font-bold mb-12 text-center'
+						className='text-3xl md:text-4xl font-bold mb-12 text-center text-gray-800 dark:text-white'
 					>
 						Video darslar
 					</motion.h2>
@@ -149,13 +153,17 @@ export default function ResourcesPage() {
 								transition={{ delay: i * 0.1 }}
 								className='group cursor-pointer'
 							>
-								<div className='bg-white/10 backdrop-blur-md rounded-3xl overflow-hidden border border-white/10 hover:border-cyan-500/50 transition-all duration-300'>
-									<div className='aspect-video bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center group-hover:scale-105 transition-transform'>
-										<PlayCircle className='w-20 h-20 text-cyan-400 group-hover:text-white transition-colors' />
+								<div className='bg-white dark:bg-slate-800/70 backdrop-blur-md rounded-3xl overflow-hidden border border-gray-200 dark:border-slate-700 hover:border-sky-500 dark:hover:border-sky-400 transition-all duration-300'>
+									<div className='aspect-video bg-gradient-to-br from-gray-200 to-gray-300 dark:from-slate-700 dark:to-slate-800 flex items-center justify-center group-hover:scale-105 transition-transform'>
+										<PlayCircle className='w-20 h-20 text-sky-600 dark:text-sky-400 group-hover:text-sky-500 dark:group-hover:text-sky-300 transition-colors' />
 									</div>
 									<div className='p-6'>
-										<h3 className='font-bold text-lg mb-2'>{video.title}</h3>
-										<p className='text-gray-400 text-sm'>{video.duration}</p>
+										<h3 className='font-bold text-lg mb-2 text-gray-900 dark:text-white'>
+											{video.title}
+										</h3>
+										<p className='text-gray-500 dark:text-gray-400 text-sm'>
+											{video.duration}
+										</p>
 									</div>
 								</div>
 							</motion.div>
@@ -165,13 +173,13 @@ export default function ResourcesPage() {
 			</section>
 
 			{/* Haftalik nutq so‘rovlar */}
-			<section className='py-16 px-6'>
+			<section className='py-16 px-6 pb-24'>
 				<div className='max-w-4xl mx-auto'>
 					<motion.h2
 						initial={{ opacity: 0, x: -50 }}
 						whileInView={{ opacity: 1, x: 0 }}
 						viewport={{ once: true }}
-						className='text-3xl md:text-4xl font-bold mb-12 text-center'
+						className='text-3xl md:text-4xl font-bold mb-12 text-center text-gray-800 dark:text-white'
 					>
 						Haftalik nutq so‘rovlar
 					</motion.h2>
@@ -180,18 +188,20 @@ export default function ResourcesPage() {
 						initial={{ opacity: 0, y: 50 }}
 						whileInView={{ opacity: 1, y: 0 }}
 						viewport={{ once: true }}
-						className='bg-white/10 backdrop-blur-lg rounded-3xl p-10 border border-white/10 shadow-2xl'
+						className='bg-white dark:bg-slate-800/70 backdrop-blur-lg rounded-3xl p-10 border border-gray-200 dark:border-slate-700 shadow-2xl'
 					>
 						<div className='space-y-6'>
 							{weeklySpeeches.map((speech, i) => (
 								<div
 									key={i}
-									className='flex items-center gap-6 p-6 bg-white/5 rounded-2xl border border-white/10 hover:bg-white/10 transition-all'
+									className='flex items-center gap-6 p-6 bg-gray-50 dark:bg-slate-700/50 rounded-2xl border border-gray-200 dark:border-slate-600 hover:bg-gray-100 dark:hover:bg-slate-700 transition-all'
 								>
-									<div className='w-12 h-12 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center font-bold text-lg flex-shrink-0'>
+									<div className='w-12 h-12 rounded-full bg-gradient-to-br from-sky-500 to-blue-600 dark:from-sky-400 dark:to-blue-500 flex items-center justify-center font-bold text-lg text-white flex-shrink-0 shadow-md'>
 										{i + 1}-hafta
 									</div>
-									<p className='text-lg text-gray-200'>{speech}</p>
+									<p className='text-lg text-gray-800 dark:text-gray-200'>
+										{speech}
+									</p>
 								</div>
 							))}
 						</div>

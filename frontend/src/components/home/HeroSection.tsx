@@ -58,17 +58,6 @@ export function HeroSection() {
 							</span>{' '}
 							muddatda o'rganing
 						</h1>
-
-						{/* <p className='text-lg md:text-xl text-slate-600 dark:text-slate-300 mb-8 leading-relaxed'>
-							Professional o'qituvchi Tulkin Rajabbayev bilan ingliz tilini
-							mukammal darajada o'rganing. Atigi 6 oydan kam muddatda IELTS 8.0+
-							ball olishingiz va yuqori natijaga erishingiz mumkin! Men Tulkin
-							Rajabbayev, 8 yildan ortiq tajribaga ega professional IELTS
-							eksperti va ingliz tili o‘qituvchisiman. Shaxsiy IELTS natijam –
-							8.5 ball. 1000+ talabaga xorijiy universitetlarga kirish, viza
-							olish va karyerada muvaffaqiyat qozonishda yordam berganman.
-						</p> */}
-
 						<p className='text-lg md:text-xl text-slate-300 mt-6 leading-relaxed'>
 							Professional o'qituvchi Tulkin Rajabbayev bilan ingliz tilini
 							mukammal darajada o'rganing. Atigi 6 oydan kam muddatda IELTS 8.0+
