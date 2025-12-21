@@ -58,19 +58,21 @@ export function HeroSection() {
 							</span>{' '}
 							muddatda o'rganing
 						</h1>
-						<p className='text-lg md:text-xl text-slate-300 mt-6 leading-relaxed'>
+
+						{/* Matnlarni light modeda ham yaxshi ko‘rinadigan qilib o‘zgartirdik */}
+						<p className='text-lg md:text-xl text-slate-600 dark:text-slate-300 mt-6 leading-relaxed'>
 							Professional o'qituvchi Tulkin Rajabbayev bilan ingliz tilini
 							mukammal darajada o'rganing. Atigi 6 oydan kam muddatda IELTS 8.0+
 							ball olishingiz va yuqori natijaga erishingiz mumkin!
 						</p>
 
-						<p className='text-lg md:text-xl text-slate-300 mt-8'>
+						<p className='text-lg md:text-xl text-slate-600 dark:text-slate-300 mt-8'>
 							Men – Tulkin Rajabbayev, professional IELTS eksperti. Shaxsiy
 							IELTS natijam – 8.5 ball. 8 yildan ortiq tajribaga egaman va 1000+
 							talabaga yordam berganman.
 						</p>
 
-						<ul className='list-disc list-inside text-lg text-slate-300 mt-8 space-y-4 max-w-2xl mx-auto'>
+						<ul className='list-disc list-inside text-lg text-slate-600 dark:text-slate-300 mt-8 space-y-4 max-w-2xl'>
 							<li>Xorijiy universitetlarga kirishda IELTS 8.0+ ball olish</li>
 							<li>Viza va emigratsiya uchun yuqori natijalar</li>
 							<li>
@@ -79,47 +81,52 @@ export function HeroSection() {
 							<li>Real hayotda bemalol inglizcha gaplashish</li>
 						</ul>
 
-						<p className='text-lg md:text-xl text-slate-300 mt-8 mb-5'>
+						<p className='text-lg md:text-xl text-slate-600 dark:text-slate-300 mt-8 mb-5'>
 							Bizning metodika qisqa muddatda real natija beradi – keling,
 							sizning muvaffaqiyatingizni birga yaratalik!
 						</p>
 
-						{/* BUTTONS */}
-						<div className='flex flex-wrap gap-4 mb-12'>
+						{/* BUTTONS – screenshotdagidek qilib to‘g‘rilandi */}
+						<div className='flex flex-wrap gap-6 mt-12 mb-16'>
+							{' '}
+							{/* masofalarni screenshotga mosladik */}
 							<Link href='/courses'>
 								<Button
 									size='lg'
-									className='text-base px-8 py-6 bg-sky-600 hover:bg-sky-700'
+									className='text-base px-10 py-7 bg-sky-600 hover:bg-sky-700 text-white font-semibold rounded-xl shadow-lg'
 								>
 									Kurslar
 								</Button>
 							</Link>
-
 							<Link href='/contact'>
 								<Button
 									size='lg'
 									variant='outline'
-									className='text-base px-8 py-6 border-2'
+									className='text-base px-10 py-7 border-2 border-sky-600 text-sky-600 hover:bg-sky-50 dark:hover:bg-sky-950 font-semibold rounded-xl'
 								>
 									Bepul Konsultatsiya
 								</Button>
 							</Link>
 						</div>
 
-						{/* TRUST BADGES */}
-						<div className='flex flex-wrap gap-6'>
+						{/* TRUST BADGES – rounded yaxshilandi */}
+						<div className='flex flex-wrap gap-8'>
+							{' '}
+							{/* gap ni kattalashtirdik chiroyli bo‘lishi uchun */}
 							{trustBadges.map((badge, index) => (
 								<motion.div
 									key={index}
 									initial={{ opacity: 0, y: 20 }}
 									animate={{ opacity: 1, y: 0 }}
 									transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
-									className='flex items-center gap-2'
+									className='flex items-center gap-3'
 								>
-									<div className='w-10 h-10 bg-sky-100 dark:bg-sky-950 rounded-lg flex items-center justify-center'>
-										<badge.icon className='w-5 h-5 text-sky-600 dark:text-sky-400' />
+									<div className='w-12 h-12 bg-sky-100 dark:bg-sky-950 rounded-2xl flex items-center justify-center'>
+										{' '}
+										{/* rounded-2xl qildik */}
+										<badge.icon className='w-6 h-6 text-sky-600 dark:text-sky-400' />
 									</div>
-									<span className='font-medium text-slate-700 dark:text-slate-300'>
+									<span className='font-medium text-slate-700 dark:text-slate-200'>
 										{badge.textUz}
 									</span>
 								</motion.div>
@@ -138,11 +145,12 @@ export function HeroSection() {
 							<div ref={lottieContainer} className='w-full h-full' />
 						</div>
 
+						{/* IELTS Score Card – rounded kattalashtirdik */}
 						<motion.div
 							initial={{ opacity: 0, scale: 0.8 }}
 							animate={{ opacity: 1, scale: 1 }}
 							transition={{ duration: 0.6, delay: 0.8 }}
-							className='absolute -bottom-6 -right-6 bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-700'
+							className='absolute -bottom-6 -right-6 bg-white dark:bg-slate-900 p-6 rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-700'
 						>
 							<div className='text-3xl font-bold text-sky-600 dark:text-sky-400'>
 								8.5

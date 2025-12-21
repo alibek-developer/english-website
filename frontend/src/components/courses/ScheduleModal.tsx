@@ -78,7 +78,7 @@ export function ScheduleModal({
                   border border-gray-200 dark:border-slate-700'
 							>
 								<div className='flex items-center gap-4'>
-									<div className='flex h-10 w-10 items-center justify-center rounded-lg bg-sky-100 dark:bg-sky-900/50'>
+									<div className='flex h-10 w-10 items-center justify-center rounded-xl bg-sky-100 dark:bg-sky-900/50'>
 										<Calendar
 											size={20}
 											className='text-sky-600 dark:text-sky-400'
@@ -103,7 +103,7 @@ export function ScheduleModal({
 								<div className='h-5 w-5 rounded-full bg-sky-500 dark:bg-sky-400' />
 							</div>
 							<p className='text-sm font-medium leading-relaxed text-gray-700 dark:text-gray-300'>
-								Dars vaqti o‘zingiz mumkin. Aniq ma’lumot uchun bog‘laning.
+								Dars vaqti o‘zgarishi mumkin. Aniq ma’lumot uchun bog‘laning.
 							</p>
 						</div>
 					</div>

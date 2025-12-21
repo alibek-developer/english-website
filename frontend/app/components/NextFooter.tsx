@@ -1,4 +1,7 @@
-// components/Footer.tsx
+// app/components/NextFooter.tsx
+'use client'
+
+import { useTheme } from '@/hooks/useTheme'
 import {
 	Facebook,
 	Instagram,
@@ -9,9 +12,11 @@ import {
 	Youtube,
 } from 'lucide-react'
 import Link from 'next/link'
-;<MessageCircle className='w-6 h-6' />
 
 export function Footer() {
+	const { theme } = useTheme()
+	const isDark = theme === 'dark'
+
 	const currentYear = new Date().getFullYear()
 
 	const socialLinks = [
@@ -46,7 +51,11 @@ export function Footer() {
 	]
 
 	return (
-		<footer className='bg-[#0b1327] border-t border-white/10'>
+		<footer
+			className={`border-t ${
+				isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'
+			}`}
+		>
 			<div className='container mx-auto px-6 py-16'>
 				<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12'>
 					{/* Brend */}
@@ -56,7 +65,11 @@ export function Footer() {
 								<span className='text-white font-black text-2xl'>T</span>
 							</div>
 							<div>
-								<h3 className='font-bold text-xl text-white'>
+								<h3
+									className={`font-bold text-xl ${
+										isDark ? 'text-white' : 'text-slate-900'
+									}`}
+								>
 									Tulkin Rajabbaev
 								</h3>
 								<p className='text-cyan-400 text-sm font-medium'>
@@ -64,7 +77,11 @@ export function Footer() {
 								</p>
 							</div>
 						</div>
-						<p className='text-gray-400 text-sm leading-relaxed max-w-xs'>
+						<p
+							className={`text-sm leading-relaxed max-w-xs ${
+								isDark ? 'text-slate-300' : 'text-slate-600'
+							}`}
+						>
 							Professional ingliz tili o‘qituvchisi va IELTS mutaxassisi. 1000+
 							talaba 7+ ball oldi.
 						</p>
@@ -72,7 +89,11 @@ export function Footer() {
 
 					{/* Quick Links */}
 					<div>
-						<h3 className='font-bold text-lg text-white mb-6'>
+						<h3
+							className={`font-bold text-lg mb-6 ${
+								isDark ? 'text-white' : 'text-slate-900'
+							}`}
+						>
 							Tezkor havolalar
 						</h3>
 						<ul className='space-y-3'>
@@ -80,7 +101,11 @@ export function Footer() {
 								<li key={link.href}>
 									<Link
 										href={link.href}
-										className='text-gray-400 hover:text-cyan-400 transition-colors duration-200 flex items-center gap-2 group'
+										className={`flex items-center gap-2 group transition-colors ${
+											isDark
+												? 'text-slate-300 hover:text-cyan-400'
+												: 'text-slate-600 hover:text-cyan-600'
+										}`}
 									>
 										<span className='w-1.5 h-1.5 bg-cyan-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity' />
 										{link.label}
@@ -92,8 +117,18 @@ export function Footer() {
 
 					{/* Kontakt */}
 					<div>
-						<h3 className='font-bold text-lg text-white mb-6'>Bog‘lanish</h3>
-						<ul className='space-y-4 text-gray-400'>
+						<h3
+							className={`font-bold text-lg mb-6 ${
+								isDark ? 'text-white' : 'text-slate-900'
+							}`}
+						>
+							Bog‘lanish
+						</h3>
+						<ul
+							className={`space-y-4 ${
+								isDark ? 'text-slate-300' : 'text-slate-600'
+							}`}
+						>
 							<li className='flex items-center gap-3'>
 								<Phone className='w-5 h-5 text-cyan-400' />
 								<span className='text-sm'>+998 99 505 16 92</span>
@@ -111,7 +146,13 @@ export function Footer() {
 
 					{/* Ijtimoiy tarmoqlar */}
 					<div>
-						<h3 className='font-bold text-lg text-white mb-6'>Meni kuzating</h3>
+						<h3
+							className={`font-bold text-lg mb-6 ${
+								isDark ? 'text-white' : 'text-slate-900'
+							}`}
+						>
+							Meni kuzating
+						</h3>
 						<div className='flex gap-4'>
 							{socialLinks.map(social => (
 								<a
@@ -120,9 +161,19 @@ export function Footer() {
 									target='_blank'
 									rel='noopener noreferrer'
 									aria-label={social.label}
-									className='group w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center transition-all duration-300 hover:bg-cyan-500/20 hover:border-cyan-500/50 hover:scale-110'
+									className={`group w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 ${
+										isDark
+											? 'bg-white/5 border border-white/10 hover:bg-cyan-500/20 hover:border-cyan-500/50'
+											: 'bg-slate-100 border border-slate-300 hover:bg-cyan-50 hover:border-cyan-500'
+									}`}
 								>
-									<social.icon className='w-6 h-6 text-gray-400 group-hover:text-cyan-400 transition-colors' />
+									<social.icon
+										className={`w-6 h-6 transition-colors ${
+											isDark
+												? 'text-slate-300 group-hover:text-cyan-400'
+												: 'text-slate-600 group-hover:text-cyan-600'
+										}`}
+									/>
 								</a>
 							))}
 						</div>
@@ -130,11 +181,25 @@ export function Footer() {
 				</div>
 
 				{/* Copyright */}
-				<div className='mt-16 pt-8 border-t border-white/10 text-center'>
-					<p className='text-gray-500 text-sm'>
+				<div
+					className={`mt-16 pt-8 border-t text-center ${
+						isDark ? 'border-slate-700' : 'border-slate-200'
+					}`}
+				>
+					<p
+						className={`text-sm ${
+							isDark ? 'text-slate-400' : 'text-slate-500'
+						}`}
+					>
 						© {currentYear} Tulkin Rajabbaev. Barcha huquqlar himoyalangan.
 					</p>
-					<p className='text-gray-600 text-xs mt-2'>Made with by Alibek</p>
+					<p
+						className={`text-xs mt-2 ${
+							isDark ? 'text-slate-500' : 'text-slate-600'
+						}`}
+					>
+						Made with ❤️ by Alibek
+					</p>
 				</div>
 			</div>
 		</footer>
