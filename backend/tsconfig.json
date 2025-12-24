@@ -1,45 +1,30 @@
 {
 	"$schema": "https://json.schemastore.org/tsconfig",
 	"compilerOptions": {
-		/* Basic Options */
 		"lib": ["ES2022"],
-		"target": "ES2022", // yoki ES2020 ham yetarli
-		"module": "ESNext", // Bun va Render uchun eng yaxshisi ESNext
-		"moduleResolution": "bundler", // Encore uchun kerak
+		"target": "ES2022",
+		"module": "ESNext",
+		"moduleResolution": "bundler",
 		"types": ["node"],
 		"allowSyntheticDefaultImports": true,
-		"esModuleInterop": true, // Express va boshqa commonjs paketlar uchun muhim
+		"esModuleInterop": true,
 		"isolatedModules": true,
 
-		/* Output Settings – BU QISM ENG MUHIM! */
-		"outDir": "./dist", // Build natijasi dist papkasiga chiqadi
-		"rootDir": "./src", // Kod src papkasidan olinadi (standart)
+		"outDir": "./dist",
+		"rootDir": "./src",
 		"sourceMap": true,
 		"declaration": true,
 
-		/* Paths – Encore uchun */
 		"paths": {
 			"~encore/*": ["./encore.gen/*"]
 		},
 
-		/* Strict Type-Checking */
 		"strict": true,
-
-		/* Workspace & Build */
 		"composite": true,
 		"incremental": true,
-
-		/* Advanced */
 		"forceConsistentCasingInFileNames": true,
 		"skipLibCheck": true
 	},
-
-	/* Kod qaysi fayllardan olinishini aniq belgilash */
-	"include": [
-		"src/**/*.ts",
-		"encore.gen/**/*.ts" // Encore generate qilgan fayllar uchun
-	],
-
-	/* Buildda hisobga olinmasligi kerak bo'lgan papkalar */
+	"include": ["src/**/*.ts", "encore.gen/**/*.ts"],
 	"exclude": ["node_modules", "dist"]
 }
