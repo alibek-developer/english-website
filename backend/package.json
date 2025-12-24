@@ -4,8 +4,9 @@
 	"type": "module",
 	"packageManager": "bun",
 	"scripts": {
-		"start": "node server.js",
-		"dev": "nodemon server.js"
+		"build": "tsc",
+		"start": "bun run ./server.js",
+		"dev": "bun --hot src/server.ts"
 	},
 	"dependencies": {
 		"@prisma/client": "^6.2.0",
