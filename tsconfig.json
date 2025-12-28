@@ -19,15 +19,13 @@
 		"allowJs": true,
 		"baseUrl": ".",
 		"paths": {
-			"@/*": ["src/*"],
-			"@/components/*": ["components/*"],
-			"@/app/*": ["app/*"],
-			"@/app/components/*": ["app/components/*"],
-			"@/app/components/home/*": ["app/components/home/*"],
-			"@/resources/*": ["src/resources/*"],
-			"@/lib/*": ["lib/*"],
-			"@/hooks/*": ["src/hooks/*"],
-			"@/contexts/*": ["contexts/*"]
+			"@/*": ["./*"],
+			"@/components/*": ["frontend/components/*"],
+			"@/lib/*": ["frontend/lib/*"],
+			"@/hooks/*": ["frontend/hooks/*"],
+			"@/types/*": ["frontend/types/*"],
+			"@/contexts/*": ["contexts/*"],
+			"@/frontend/*": ["frontend/*"]
 		},
 		"incremental": true,
 		"plugins": [
@@ -46,4 +44,3 @@
 	],
 	"exclude": ["node_modules", "dist", ".next"]
 }
-
