@@ -79,25 +79,13 @@ git push encore main
 
 ## Environment Variables
 
-### Backend (Encore Cloud Dashboard)
-
-- `StripeSecretKey` - Stripe secret key (sk*test*... yoki sk*live*...)
-- `StripeWebhookSecret` - Stripe webhook secret (whsec\_...)
-- `FRONTEND_URL` - Frontend URL (https://your-domain.vercel.app)
+### Backend
+Encore Cloud dashboard'da qo'shing:
 - Database avtomatik yaratiladi
 
 ### Frontend (Vercel)
-
 - `VITE_CLERK_PUBLISHABLE_KEY` - Clerk public key
-- `VITE_BACKEND_URL` - Encore backend URL (https://staging-your-app.encr.app)
-
-### Stripe Webhook Setup
-
-1. Stripe Dashboard'ga kiring
-2. Developers > Webhooks > Add endpoint
-3. Endpoint URL: `https://staging-your-app.encr.app/webhooks/stripe`
-4. Events to send: `checkout.session.completed`
-5. Webhook secret'ni nusxalang va Encore Cloud'da `StripeWebhookSecret` ga qo'shing
+- `VITE_BACKEND_URL` - Encore backend URL
 
 ## Features
 
@@ -116,10 +104,9 @@ git push encore main
 
 URL: `/admin`
 Login: `admin@alibek.uz`
-Password: `UzbekTeacher$2025!`
+Password: `admin123`
 
 Imkoniyatlar:
-
 - O'quvchilarni ko'rish
 - Yangi video qo'shish
 - Yangi uy vazifa qo'shish
@@ -131,10 +118,9 @@ Imkoniyatlar:
 
 URL: `/teacher`
 Login: `teacher@alibek.uz`
-Password: `UzbekTeacher$2025!`
+Password: `teacher123`
 
 Imkoniyatlar:
-
 - O'quvchilarni ko'rish va baholash
 - Uy vazifalarni tekshirish
 - Statistika
@@ -145,7 +131,6 @@ URL: `/dashboard`
 Auth: Clerk (Google, Email)
 
 Imkoniyatlar:
-
 - Video darslarni ko'rish
 - Uy vazifalarni topshirish
 - Progress tracking
