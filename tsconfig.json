@@ -35,11 +35,10 @@
 		]
 	},
 	"include": [
-		"src/**/*",
 		"app/**/*",
-		"components/**/*",
-		"hooks/**/*",
-		"lib/**/*",
+		"frontend/**/*",
+		"contexts/**/*",
+		"next-env.d.ts",
 		".next/types/**/*.ts"
 	],
 	"exclude": ["node_modules", "dist", ".next"]
