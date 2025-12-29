@@ -51,9 +51,17 @@ export function Footer() {
 	const t = content[language as 'uz' | 'en']
 
 	const socialLinks = [
-		{ icon: Instagram, href: '#', color: 'hover:text-pink-500' },
+		{
+			icon: Instagram,
+			href: 'https://www.instagram.com/tulkin_rajabbaev?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==',
+			color: 'hover:text-pink-500',
+		},
 		{ icon: Facebook, href: '#', color: 'hover:text-blue-500' },
-		{ icon: Send, href: '#', color: 'hover:text-sky-500' },
+		{
+			icon: Send,
+			href: 'https://t.me/Tulkin_tour_guide',
+			color: 'hover:text-sky-500',
+		},
 	]
 
 	return (
@@ -82,6 +90,7 @@ export function Footer() {
 									key={i}
 									href={social.href}
 									className={`p-3 rounded-xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-400 transition-all hover:scale-110 shadow-sm ${social.color}`}
+									target='_blank'
 								>
 									<social.icon className='w-5 h-5' />
 								</Link>
@@ -102,6 +111,7 @@ export function Footer() {
 											item.toLowerCase() === 'home' ? '' : item.toLowerCase()
 										}`}
 										className='text-slate-600 dark:text-slate-400 font-bold hover:text-blue-600 dark:hover:text-blue-400 transition-colors flex items-center group'
+										target='_blank'
 									>
 										<span className='w-0 group-hover:w-4 h-[2px] bg-blue-600 dark:bg-blue-400 mr-0 group-hover:mr-2 transition-all opacity-0 group-hover:opacity-100' />
 										{item}
@@ -130,7 +140,7 @@ export function Footer() {
 									<Phone className='w-5 h-5' />
 								</div>
 								<span className='text-slate-600 dark:text-slate-400 font-medium tracking-wide'>
-									+998 90 123 45 67
+									+998 99 505 16 92
 								</span>
 							</li>
 							<li className='flex items-center gap-4'>
@@ -138,7 +148,7 @@ export function Footer() {
 									<Mail className='w-5 h-5' />
 								</div>
 								<span className='text-slate-600 dark:text-slate-400 font-medium'>
-									info@waveenglish.uz
+									trajabboyev@gmail.com
 								</span>
 							</li>
 						</ul>

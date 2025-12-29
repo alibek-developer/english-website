@@ -14,7 +14,7 @@ export function WhatsAppButton() {
 	const { language } = useApp()
 
 	// Telegram username'ni kiriting
-	const telegramUsername = 'wave_english'
+	const telegramUsername = 'Tulkin_tour_guide'
 
 	return (
 		<a

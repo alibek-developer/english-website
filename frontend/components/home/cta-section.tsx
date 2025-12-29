@@ -87,7 +87,7 @@ export function CTASection() {
 
 							{/* Secondary Telegram Button */}
 							<a
-								href='https://t.me/your_telegram_username'
+								href='https://t.me/Tulkin_tour_guide'
 								target='_blank'
 								rel='noopener noreferrer'
 								className='flex items-center gap-3 px-10 py-5 bg-white/10 backdrop-blur-md border-2 

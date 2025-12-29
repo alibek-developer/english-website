@@ -45,17 +45,17 @@ export function ContactPage() {
 			contactCards: {
 				phone: {
 					title: 'Telefon',
-					value: '+998 90 123 45 67',
+					value: '+998 99 505 16 92',
 					sub: 'Har kuni 9:00 - 18:00',
 				},
 				email: {
 					title: 'Email',
-					value: 'info@waveenglish.uz',
+					value: 'trajabboyev@gmail.com',
 					sub: '24 soat ichida javob',
 				},
 				address: {
 					title: 'Manzil',
-					value: 'Toshkent, Shayxontohur',
+					value: 'Xorazm, Shovot',
 					sub: "Bunyodkor ko'chasi, 12-uy",
 				},
 			},
@@ -87,17 +87,17 @@ export function ContactPage() {
 			contactCards: {
 				phone: {
 					title: 'Call Us',
-					value: '+998 90 123 45 67',
+					value: '+998 99 505 16 92',
 					sub: 'Daily 9:00 - 18:00',
 				},
 				email: {
 					title: 'Email Us',
-					value: 'info@waveenglish.uz',
+					value: 'trajabboyev@gmail.com',
 					sub: 'Response within 24h',
 				},
 				address: {
 					title: 'Visit Us',
-					value: 'Tashkent, Shaykhantakhur',
+					value: 'Khorezm, Shovot',
 					sub: '12, Bunyodkor street',
 				},
 			},
@@ -202,20 +202,23 @@ export function ContactPage() {
 							</h3>
 							<div className='flex gap-4'>
 								<a
-									href='#'
+									href='https://www.instagram.com/tulkin_rajabbaev?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=='
 									className='w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center hover:bg-white/20 transition-colors'
+									target='_blank'
 								>
 									<Instagram className='w-6 h-6' />
 								</a>
 								<a
 									href='#'
 									className='w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center hover:bg-white/20 transition-colors'
+									target='_blank'
 								>
 									<Facebook className='w-6 h-6' />
 								</a>
 								<a
-									href='#'
+									href='https://t.me/Tulkin_tour_guide'
 									className='w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center hover:bg-white/20 transition-colors'
+									target='_blank'
 								>
 									<MessageCircle className='w-6 h-6' />
 								</a>
@@ -298,10 +301,23 @@ export function ContactPage() {
 					viewport={{ once: true }}
 					className='relative rounded-[3.5rem] overflow-hidden group shadow-2xl'
 				>
-					<div className='absolute inset-0 bg-slate-200 dark:bg-slate-800 animate-pulse group-hover:hidden' />
-					{/* Placeholder for real map. You can integrate Google Maps iframe here */}
-					<div className='h-[500px] w-full bg-slate-100 dark:bg-white/5 flex flex-col items-center justify-center border border-slate-200 dark:border-white/10'>
-						<div className='p-6 bg-white dark:bg-slate-800 rounded-[2rem] shadow-2xl text-center relative z-10 border border-slate-100 dark:border-white/5'>
+					{/* Yuklanish effekti (Skeleton) */}
+					<div className='absolute inset-0 bg-slate-200 dark:bg-slate-800 animate-pulse group-hover:hidden pointer-events-none' />
+
+					<div className='h-[500px] w-full bg-slate-100 dark:bg-white/5 relative flex items-center justify-center border border-slate-200 dark:border-white/10'>
+						{/* Google Maps Iframe */}
+						<iframe
+							src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d515.8732927232121!2d60.29104297600298!3d41.65465872938602!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x41de49003887a0a7%3A0xc84af4a76a6708f4!2sIT%20Park%20Shovot!5e0!3m2!1sen!2s!4v1767011654387!5m2!1sen!2s' // Bu yerga haqiqiy embed linkini qo'ying
+							width='100%'
+							height='100%'
+							style={{ border: 0 }}
+							loading='lazy'
+							referrerPolicy='no-referrer-when-downgrade'
+							className='absolute inset-0 z-0 grayscale-[20%] contrast-[1.1] dark:invert-[90%] dark:hue-rotate-[180deg]'
+						></iframe>
+
+						{/* Ma'lumot kartochkasi (Karta ustida turadi) */}
+						{/* <div className='p-6 bg-white/90 dark:bg-slate-800/90 backdrop-blur-md rounded-[2rem] shadow-2xl text-center relative z-10 border border-slate-100 dark:border-white/5 pointer-events-none'>
 							<MapPin className='w-12 h-12 text-blue-600 mx-auto mb-4' />
 							<h3 className='text-xl font-black dark:text-white mb-2'>
 								{t.findUs}
@@ -309,9 +325,7 @@ export function ContactPage() {
 							<p className='text-slate-500 dark:text-slate-400 max-w-xs'>
 								{t.contactCards.address.sub}
 							</p>
-						</div>
-						{/* Decorative map-like lines in background */}
-						<div className="absolute inset-0 opacity-10 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/pinstriped-suit.png')]" />
+						</div> */}
 					</div>
 				</motion.div>
 			</div>
